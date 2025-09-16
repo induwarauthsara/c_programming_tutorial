@@ -1,0 +1,3507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Programming Tutorial - Complete Beginner's Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+            transform: translateY(-2px);
+        }
+
+        .section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #34495e;
+            margin: 25px 0 15px 0;
+            font-size: 1.4em;
+        }
+
+        .section h4 {
+            color: #2980b9;
+            margin: 20px 0 10px 0;
+            font-size: 1.2em;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .code-block .comment {
+            color: #6a9955;
+        }
+
+        .code-block .keyword {
+            color: #569cd6;
+        }
+
+        .code-block .string {
+            color: #ce9178;
+        }
+
+        .code-block .number {
+            color: #b5cea8;
+        }
+
+        .example-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #28a745;
+        }
+
+        .beginner-note {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #2196f3;
+        }
+
+        .important-note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #f39c12;
+        }
+
+        .warning-box {
+            background: #ffebee;
+            border: 1px solid #f44336;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #f44336;
+        }
+
+        .analogy-box {
+            background: #f3e5f5;
+            border: 1px solid #9c27b0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #9c27b0;
+        }
+
+        .step-by-step {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #4caf50;
+        }
+
+        .step-by-step ol {
+            margin-left: 20px;
+        }
+
+        .step-by-step li {
+            margin: 10px 0;
+            padding: 5px 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .memory-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            flex-wrap: wrap;
+        }
+
+        .memory-box {
+            background: white;
+            border: 2px solid #333;
+            padding: 15px;
+            margin: 5px;
+            text-align: center;
+            border-radius: 5px;
+            min-width: 80px;
+            font-size: 14px;
+        }
+
+        .pointer-arrow {
+            font-size: 24px;
+            color: #e74c3c;
+            margin: 0 10px;
+        }
+
+        .exercise-box {
+            background: #fff8e1;
+            border: 1px solid #ff9800;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #ff9800;
+        }
+
+        .output-box {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            border-left: 4px solid #4caf50;
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .concept-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #667eea;
+        }
+
+        .visual-example {
+            background: #f0f8ff;
+            border: 2px dashed #4169e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .progress-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+        }
+
+        .progress-step {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            margin: 0 5px;
+            border-radius: 5px;
+            background: #e0e0e0;
+            font-size: 14px;
+        }
+
+        .progress-step.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .code-explanation {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .code-explanation .code-block {
+            margin: 0;
+        }
+
+        .explanation-text {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #17a2b8;
+        }
+
+        .troubleshooting {
+            background: #ffeaa7;
+            border: 1px solid #fdcb6e;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #e17055;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .nav {
+                flex-direction: column;
+            }
+            
+            .nav-btn {
+                width: 100%;
+            }
+
+            .code-explanation {
+                grid-template-columns: 1fr;
+            }
+
+            .concept-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>C Programming Tutorial</h1>
+            <p>Complete Beginner's Guide to Pointers, Structures, Unions & File Handling</p>
+            
+            <div class="nav">
+                <button class="nav-btn active" onclick="showSection('intro')">Introduction</button>
+                <button class="nav-btn" onclick="showSection('pointers')">Pointers</button>
+                <button class="nav-btn" onclick="showSection('structures')">Structures</button>
+                <button class="nav-btn" onclick="showSection('unions')">Unions</button>
+                <button class="nav-btn" onclick="showSection('filehandling')">File Handling</button>
+                <button class="nav-btn" onclick="showSection('comparison')">Summary</button>
+                <button class="nav-btn" onclick="showSection('exercises')">Practice</button>
+                <button class="nav-btn" onclick="showSection('examquestions')">2024 Exam</button>
+            </div>
+
+        <!-- 2024 Exam Questions Section -->
+        <div id="examquestions" class="section">
+            <h2>📝 2024 Exam Questions & Solutions</h2>
+            
+            <div class="beginner-note">
+                <h4>🎯 Real Exam Practice</h4>
+                <p>These are actual questions from a 2024 C programming exam. Practice with these to understand exactly what you need to know for your exams. Each question includes detailed explanations and step-by-step solutions.</p>
+            </div>
+
+            <div class="progress-indicator" style="background: #f0f8ff;">
+                <div class="progress-step">Question 3: Pointers</div>
+                <div class="progress-step">Question 4: Structures & Unions</div>
+            </div>
+
+            <h3>📋 Question 3: Pointers (Total: 25 marks)</h3>
+            
+            <div class="exercise-box">
+                <h4>Question 3(a) - What is a Pointer? [3 marks]</h4>
+                <p><strong>Question:</strong> What is a pointer in C? Explain using a suitable example.</p>
+                
+                <details style="margin-top: 15px;">
+                    <summary><strong>🔍 Click to See Complete Answer</strong></summary>
+                    <div style="margin-top: 15px;">
+                        <div class="step-by-step">
+                            <h5>Complete Answer:</h5>
+                            <p><strong>Definition:</strong> A pointer in C is a variable that stores the memory address of another variable. Instead of holding a data value directly, it holds the location where a data value is stored.</p>
+                            
+                            <p><strong>Key Uses:</strong></p>
+                            <ul>
+                                <li>Dynamic memory allocation</li>
+                                <li>Working with arrays efficiently</li>
+                                <li>Implementing call-by-reference in functions</li>
+                            </ul>
+                            
+                            <p><strong>Key Operators:</strong></p>
+                            <ul>
+                                <li><strong>&</strong> (address-of): Gets the memory address of a variable</li>
+                                <li><strong>*</strong> (dereference): Accesses the value stored at an address</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="keyword">int</span> main() {
+    <span class="keyword">int</span> value = <span class="number">100</span>;         <span class="comment">// Declare an integer variable 'value'</span>
+    <span class="keyword">int</span> *ptr;                <span class="comment">// Declare a pointer variable 'ptr'</span>
+
+    ptr = &value;            <span class="comment">// Assign the memory address of 'value' to 'ptr'</span>
+
+    printf(<span class="string">"Value of 'value': %d\n"</span>, value);      <span class="comment">// Output: 100</span>
+    printf(<span class="string">"Address of 'value': %p\n"</span>, &value);    <span class="comment">// Output: (e.g., 0x7ffeee00b000)</span>
+    printf(<span class="string">"Value of 'ptr' (address it holds): %p\n"</span>, ptr); <span class="comment">// Output: (same as address of 'value')</span>
+    printf(<span class="string">"Value pointed to by 'ptr': %d\n"</span>, *ptr); <span class="comment">// Output: 100</span>
+
+    *ptr = <span class="number">200</span>;              <span class="comment">// Change the value at the address 'ptr' points to</span>
+    printf(<span class="string">"New value of 'value' after pointer modification: %d\n"</span>, value); <span class="comment">// Output: 200</span>
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+                        </div>
+                        
+                        <div class="explanation-text">
+                            <h5>Step-by-Step Explanation:</h5>
+                            <ol>
+                                <li><strong>Declaration:</strong> <code>int *ptr;</code> declares ptr as a pointer to an integer</li>
+                                <li><strong>Assignment:</strong> <code>ptr = &value;</code> makes ptr point to value</li>
+                                <li><strong>Access:</strong> <code>*ptr</code> accesses the value that ptr points to</li>
+                                <li><strong>Modification:</strong> <code>*ptr = 200;</code> changes the original variable through the pointer</li>
+                            </ol>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <div class="exercise-box">
+                <h4>Question 3(b) - Pointer Concepts True/False [14 marks]</h4>
+                <p><strong>Instructions:</strong> For each code snippet, determine if the statements are True (T) or False (F).</p>
+                
+                <h5>Part (i) - Pointer to Const</h5>
+                <div class="code-block">
+<span class="keyword">int</span> a = <span class="number">10</span>;
+<span class="keyword">const int</span> b = <span class="number">30</span>;
+<span class="keyword">const int</span> *p2 = &b;
+p2 = &a;
+printf(<span class="string">"%d\n"</span>, *p2);
+                </div>
+                
+                <div class="important-note">
+                    <h5>Statements to Evaluate:</h5>
+                    <ol>
+                        <li>p2 points to a constant.</li>
+                        <li>*p2 = 40; is a valid assignment that modifies the value of variable b.</li>
+                        <li>p2 = &a; is a valid assignment as p2 can points to another variable.</li>
+                        <li>The output of the printf statement is 20.</li>
+                    </ol>
+                </div>
+                
+                <details style="margin-top: 15px;">
+                    <summary><strong>📋 Click for Answers & Explanations</strong></summary>
+                    <div style="margin-top: 15px;">
+                        <div class="concept-grid">
+                            <div class="concept-card" style="background: #e8f5e8;">
+                                <h5>1. True (T)</h5>
+                                <p><code>const int *p2</code> means p2 is a pointer to a constant integer. The value pointed to cannot be changed through p2.</p>
+                            </div>
+                            
+                            <div class="concept-card" style="background: #ffebee;">
+                                <h5>2. False (F)</h5>
+                                <p><code>*p2 = 40;</code> is invalid because p2 points to a const int. Even if allowed, after <code>p2 = &a;</code>, *p2 would refer to a, not b.</p>
+                            </div>
+                            
+                            <div class="concept-card" style="background: #e8f5e8;">
+                                <h5>3. True (T)</h5>
+                                <p>p2 itself is not a constant pointer (only the data it points to is constant). Therefore, p2 can be reassigned to point to different variables.</p>
+                            </div>
+                            
+                            <div class="concept-card" style="background: #ffebee;">
+                                <h5>4. False (F)</h5>
+                                <p>After <code>p2 = &a;</code>, p2 points to a, whose value is 10. The printf statement would output 10, not 20.</p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+                
+                <h5>Part (ii) - Const Pointer</h5>
+                <div class="code-block">
+<span class="keyword">int</span> a = <span class="number">10</span>;
+<span class="keyword">int</span> c = <span class="number">50</span>;
+<span class="keyword">int</span> *<span class="keyword">const</span> p3 = &c;
+*p3 = <span class="number">60</span>;
+printf(<span class="string">"%d\n"</span>, c);
+                </div>
+                
+                <div class="important-note">
+                    <h5>Statements to Evaluate:</h5>
+                    <ol>
+                        <li>p3 is a pointer to constant which will allow you to change the value of the variable c.</li>
+                        <li>The statement *p3 = 60; allows modifying the value of c through p3.</li>
+                        <li>As p3 is a constant pointer, if you want it can be reassigned as p3 = &a;</li>
+                        <li>The output of printf statement is 60.</li>
+                    </ol>
+                </div>
+                
+                <details style="margin-top: 15px;">
+                    <summary><strong>📋 Click for Answers & Explanations</strong></summary>
+                    <div style="margin-top: 15px;">
+                        <div class="concept-grid">
+                            <div class="concept-card" style="background: #ffebee;">
+                                <h5>1. False (F)</h5>
+                                <p><code>int *const p3</code> means p3 is a constant pointer to an integer. The pointer itself cannot be changed, but the value it points to can be modified.</p>
+                            </div>
+                            
+                            <div class="concept-card" style="background: #e8f5e8;">
+                                <h5>2. True (T)</h5>
+                                <p><code>*p3 = 60;</code> is valid because p3 points to a non-constant integer (c). Only p3's address cannot change, not the data it points to.</p>
+                            </div>
+                            
+                            <div class="concept-card" style="background: #ffebee;">
+                                <h5>3. False (F)</h5>
+                                <p>Since p3 is a const pointer, its value (the address it holds) cannot be changed. <code>p3 = &a;</code> is an invalid reassignment.</p>
+                            </div>
+                            
+                            <div class="concept-card" style="background: #e8f5e8;">
+                                <h5>4. True (T)</h5>
+                                <p>c was 50, then <code>*p3 = 60;</code> changed c to 60. The printf statement will output 60.</p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+                
+                <h5>Part (iii) - Regular Pointer</h5>
+                <div class="code-block">
+<span class="keyword">int</span> a = <span class="number">10</span>;
+<span class="keyword">int</span> *p1 = &a;
+*p1 = <span class="number">20</span>;
+printf(<span class="string">"Value of a = %d\n"</span>, a);
+                </div>
+                
+                <div class="important-note">
+                    <h5>Statements to Evaluate:</h5>
+                    <ol>
+                        <li>Modifying the value of a through p1 is not possible.</li>
+                        <li>Output of the program code is 10.</li>
+                    </ol>
+                </div>
+                
+                <details style="margin-top: 15px;">
+                    <summary><strong>📋 Click for Answers & Explanations</strong></summary>
+                    <div style="margin-top: 15px;">
+                        <div class="concept-grid">
+                            <div class="concept-card" style="background: #ffebee;">
+                                <h5>1. False (F)</h5>
+                                <p><code>int *p1 = &a;</code> declares a regular pointer p1 to an integer. <code>*p1 = 20;</code> correctly modifies the value of a through the pointer p1.</p>
+                            </div>
+                            
+                            <div class="concept-card" style="background: #ffebee;">
+                                <h5>2. False (F)</h5>
+                                <p>The variable a was initialized to 10, then modified to 20 by <code>*p1 = 20;</code>. The printf statement will output "Value of a = 20".</p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+                
+                <h5>Part (iv) - Const Pointer to Const</h5>
+                <div class="code-block">
+<span class="keyword">int</span> a = <span class="number">10</span>;
+<span class="keyword">const int</span> d = <span class="number">70</span>;
+<span class="keyword">const int</span> *<span class="keyword">const</span> p4 = &d;
+<span class="comment">//printf("%d\n", *p4);</span>
+                </div>
+                
+                <div class="important-note">
+                    <h5>Statements to Evaluate:</h5>
+                    <ol>
+                        <li>p4 is a constant pointer to a constant variable.</li>
+                        <li>The statement *p4 = 80; will not be allowed in this context.</li>
+                        <li>p4 is a constant pointer, it can't be reassigned as p4 = &a;</li>
+                        <li>The output of printf statement is the memory address of variable d.</li>
+                    </ol>
+                </div>
+                
+                <details style="margin-top: 15px;">
+                    <summary><strong>📋 Click for Answers & Explanations</strong></summary>
+                    <div style="margin-top: 15px;">
+                        <div class="concept-grid">
+                            <div class="concept-card" style="background: #e8f5e8;">
+                                <h5>1. True (T)</h5>
+                                <p><code>const int *const p4</code> declares p4 as a constant pointer to a constant integer. Neither the pointer nor the value it points to can be changed.</p>
+                            </div>
+                            
+                            <div class="concept-card" style="background: #e8f5e8;">
+                                <h5>2. True (T)</h5>
+                                <p><code>*p4 = 80;</code> is invalid because p4 points to a constant integer. The value d cannot be modified via p4.</p>
+                            </div>
+                            
+                            <div class="concept-card" style="background: #e8f5e8;">
+                                <h5>3. True (T)</h5>
+                                <p>As p4 is a const pointer, its memory address cannot be changed. <code>p4 = &a;</code> is an invalid assignment.</p>
+                            </div>
+                            
+                            <div class="concept-card" style="background: #ffebee;">
+                                <h5>4. False (F)</h5>
+                                <p>If the printf were uncommented, it would print the value 70 (value of d), not its memory address. Use %p for addresses.</p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <div class="exercise-box">
+                <h4>Question 3(c) - Array Manipulation with Pointers [8 marks]</h4>
+                <p><strong>Given Code:</strong></p>
+                <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+<span class="keyword">int</span> main() {
+    <span class="keyword">int</span> arr[<span class="number">6</span>] = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>};
+    <span class="keyword">int</span> *ptr = arr;
+    <span class="comment">// Your code goes here</span>
+}
+                </div>
+                
+                <h5>Part (i) - Add 10 to Third Element [2 marks]</h5>
+                <p><strong>Question:</strong> Write code to add the value 10 to the third element of the array using pointer ptr.</p>
+                
+                <details style="margin-top: 10px;">
+                    <summary><strong>💡 Click for Answer & Explanation</strong></summary>
+                    <div style="margin-top: 10px;">
+                        <div class="code-block">
+*(ptr + <span class="number">2</span>) += <span class="number">10</span>; <span class="comment">// or *(ptr + 2) = *(ptr + 2) + 10;</span>
+                        </div>
+                        
+                        <div class="explanation-text">
+                            <h5>Detailed Explanation:</h5>
+                            <ul>
+                                <li><strong>Array indexing:</strong> Third element is at index 2 (0-based indexing)</li>
+                                <li><strong>Pointer arithmetic:</strong> <code>(ptr + 2)</code> points to the third element</li>
+                                <li><strong>Dereferencing:</strong> <code>*(ptr + 2)</code> accesses the value at that location</li>
+                                <li><strong>Addition assignment:</strong> <code>+= 10</code> adds 10 to the existing value</li>
+                            </ul>
+                            
+                            <div class="visual-example">
+                                <h5>Memory Visualization:</h5>
+                                <div style="display: flex; justify-content: space-around; align-items: center;">
+                                    <div class="memory-box">arr[0] = 1<br>ptr points here</div>
+                                    <div class="memory-box">arr[1] = 2<br>ptr + 1</div>
+                                    <div class="memory-box" style="background: #ffeb3b;">arr[2] = 3<br>ptr + 2 ← Target</div>
+                                    <div class="memory-box">arr[3] = 4<br>ptr + 3</div>
+                                    <div class="memory-box">arr[4] = 5<br>ptr + 4</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+                
+                <h5>Part (ii) - Print Array with Commas [6 marks]</h5>
+                <p><strong>Question:</strong> Write a for loop to print the array values in one line separating each value using a comma (,). Use the defined pointer ptr to access the values in the array within the for loop.</p>
+                
+                <details style="margin-top: 10px;">
+                    <summary><strong>💡 Click for Complete Solution</strong></summary>
+                    <div style="margin-top: 10px;">
+                        <div class="code-block">
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {
+    printf(<span class="string">"%d"</span>, *(ptr + i)); <span class="comment">// Access value using pointer arithmetic</span>
+    <span class="keyword">if</span> (i &lt; <span class="number">4</span>) {               <span class="comment">// Check if it's not the last element</span>
+        printf(<span class="string">","</span>);           <span class="comment">// Print a comma if it's not the last element</span>
+    }
+}
+printf(<span class="string">"\n"</span>); <span class="comment">// Print a newline character at the end for formatting</span>
+                        </div>
+                        
+                        <div class="output-box">
+                            <h5>Expected Output:</h5>
+                            <pre>1,2,3,4,5</pre>
+                        </div>
+                        
+                        <div class="explanation-text">
+                            <h5>Code Breakdown:</h5>
+                            <ol>
+                                <li><strong>Loop structure:</strong> <code>for (int i = 0; i < 5; i++)</code> iterates through 5 elements</li>
+                                <li><strong>Pointer access:</strong> <code>*(ptr + i)</code> gets the value at position i</li>
+                                <li><strong>Conditional comma:</strong> <code>if (i < 4)</code> prevents comma after last element</li>
+                                <li><strong>Formatting:</strong> <code>printf("\n")</code> adds newline for clean output</li>
+                            </ol>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <h3>📐 Question 4: Structures & Unions (Total: 25 marks)</h3>
+            
+            <div class="exercise-box">
+                <h4>Question 4(a) - Structure Definition Validation [5 marks]</h4>
+                <p><strong>Instructions:</strong> State whether each struct definition is "correct" or "wrong".</p>
+                
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <h5>1. struct Student { char name; int age; };</h5>
+                        <details>
+                            <summary><strong>Click for Answer</strong></summary>
+                            <div style="margin-top: 10px; padding: 10px; background: #e8f5e8; border-radius: 5px;">
+                                <strong>Answer: Correct</strong><br>
+                                This is a valid structure definition with a tag (Student) and properly declared members.
+                            </div>
+                        </details>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h5>2. struct { int id; float salary; } Employee;</h5>
+                        <details>
+                            <summary><strong>Click for Answer</strong></summary>
+                            <div style="margin-top: 10px; padding: 10px; background: #e8f5e8; border-radius: 5px;">
+                                <strong>Answer: Correct</strong><br>
+                                This is a valid anonymous structure definition with immediate variable declaration.
+                            </div>
+                        </details>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h5>3. struct Car { char model; int year; carColor; };</h5>
+                        <details>
+                            <summary><strong>Click for Answer</strong></summary>
+                            <div style="margin-top: 10px; padding: 10px; background: #ffebee; border-radius: 5px;">
+                                <strong>Answer: Wrong</strong><br>
+                                The member 'carColor' is declared without a data type. All members must have specified data types.
+                            </div>
+                        </details>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h5>4. struct Person { char gender; int height; char name; };</h5>
+                        <details>
+                            <summary><strong>Click for Answer</strong></summary>
+                            <div style="margin-top: 10px; padding: 10px; background: #e8f5e8; border-radius: 5px;">
+                                <strong>Answer: Correct</strong><br>
+                                Valid structure definition with properly declared members of different data types.
+                            </div>
+                        </details>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h5>5. struct Book { char title; double price; } myBook;</h5>
+                        <details>
+                            <summary><strong>Click for Answer</strong></summary>
+                            <div style="margin-top: 10px; padding: 10px; background: #e8f5e8; border-radius: 5px;">
+                                <strong>Answer: Correct</strong><br>
+                                Valid structure definition with tag (Book) and immediate variable declaration (myBook).
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <h4>Question 4(b) - Struct vs Union True/False [5 marks]</h4>
+                <p><strong>Instructions:</strong> State whether each statement is True (T) or False (F).</p>
+                
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <h5>1. The size of a union is determined by the size of its largest member</h5>
+                        <details>
+                            <summary><strong>Click for Answer</strong></summary>
+                            <div style="margin-top: 10px; padding: 10px; background: #e8f5e8; border-radius: 5px;">
+                                <strong>Answer: True (T)</strong><br>
+                                Union members share the same memory space, so the compiler allocates memory equal to the largest member.
+                            </div>
+                        </details>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h5>2. A struct can contain a union, but a union cannot contain a struct</h5>
+                        <details>
+                            <summary><strong>Click for Answer</strong></summary>
+                            <div style="margin-top: 10px; padding: 10px; background: #ffebee; border-radius: 5px;">
+                                <strong>Answer: False (F)</strong><br>
+                                Both statements are possible: a struct can contain a union AND a union can contain a struct as a member.
+                            </div>
+                        </details>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h5>3. Accessing a union member other than the most recently assigned leads to undefined behavior</h5>
+                        <details>
+                            <summary><strong>Click for Answer</strong></summary>
+                            <div style="margin-top: 10px; padding: 10px; background: #e8f5e8; border-radius: 5px;">
+                                <strong>Answer: True (T)</strong><br>
+                                Since union members share memory, only the last assigned member contains valid data.
+                            </div>
+                        </details>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h5>4. Structs can have flexible array members, unions cannot</h5>
+                        <details>
+                            <summary><strong>Click for Answer</strong></summary>
+                            <div style="margin-top: 10px; padding: 10px; background: #fff3cd; border-radius: 5px;">
+                                <strong>Answer: Not covered in provided materials</strong><br>
+                                This is a C99 feature not discussed in the course materials. (Generally true in C programming)
+                            </div>
+                        </details>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h5>5. If a struct contains a union, the struct size includes the union size plus padding</h5>
+                        <details>
+                            <summary><strong>Click for Answer</strong></summary>
+                            <div style="margin-top: 10px; padding: 10px; background: #e8f5e8; border-radius: 5px;">
+                                <strong>Answer: True (T)</strong><br>
+                                The struct treats the union as a single member and includes its size in the total calculation.
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <h4>Question 4(c) - Union Behavior Output Prediction [12 marks]</h4>
+                <p><strong>Program to Analyze:</strong></p>
+                <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;string.h&gt;</span>
+
+<span class="keyword">struct</span> Address {
+    <span class="keyword">char</span> city[<span class="number">6</span>];
+    <span class="keyword">int</span> pincode;
+};
+
+<span class="keyword">union</span> Person {
+    <span class="keyword">struct</span> {
+        <span class="keyword">char</span> name[<span class="number">6</span>];
+        <span class="keyword">int</span> age;
+    } details;
+    <span class="keyword">struct</span> Address addr;
+};
+
+<span class="keyword">int</span> main() {
+    <span class="keyword">union</span> Person p;
+
+    strcpy(p.details.name, <span class="string">"Rusiru"</span>);
+    p.details.age = <span class="number">30</span>;
+
+    printf(<span class="string">"Name: %s\n"</span>, p.details.name);         <span class="comment">// (i)</span>
+    printf(<span class="string">"Age: %d\n"</span>, p.details.age);           <span class="comment">// (ii)</span>
+
+    strcpy(p.addr.city, <span class="string">"Borella"</span>);
+    p.addr.pincode = <span class="number">12345</span>;
+
+    printf(<span class="string">"City: %s\n"</span>, p.addr.city);           <span class="comment">// (iii)</span>
+    printf(<span class="string">"Pincode: %d\n"</span>, p.addr.pincode);     <span class="comment">// (iv)</span>
+
+    printf(<span class="string">"Name after address set: %s\n"</span>, p.details.name); <span class="comment">// (v)</span>
+    printf(<span class="string">"Age after address set: %d\n"</span>, p.details.age);   <span class="comment">// (vi)</span>
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+                </div>
+                
+                <details style="margin-top: 15px;">
+                    <summary><strong>🔍 Click for Complete Output & Explanation</strong></summary>
+                    <div style="margin-top: 15px;">
+                        <div class="output-box">
+                            <h5>Program Output:</h5>
+                            <pre>(i)  Name: Rusiru
+(ii) Age: 30
+(iii) City: Borella
+(iv) Pincode: 12345
+(v)  Name after address set: Borella
+(vi) Age after address set: 12345</pre>
+                        </div>
+                        
+                        <div class="explanation-text">
+                            <h5>Detailed Explanation:</h5>
+                            <ol>
+                                <li><strong>Union Declaration:</strong> <code>union Person p;</code> creates a union where <code>details</code> and <code>addr</code> share the same memory space.</li>
+                                
+                                <li><strong>Initial Assignment:</strong>
+                                    <ul>
+                                        <li><code>strcpy(p.details.name, "Rusiru");</code> - Stores "Rusiru" in shared memory</li>
+                                        <li><code>p.details.age = 30;</code> - Stores 30 after the name string</li>
+                                    </ul>
+                                </li>
+                                
+                                <li><strong>First Output (i & ii):</strong> Shows the initially stored values correctly.</li>
+                                
+                                <li><strong>Memory Overwrite:</strong>
+                                    <ul>
+                                        <li><code>strcpy(p.addr.city, "Borella");</code> - Overwrites the same memory where name was stored</li>
+                                        <li><code>p.addr.pincode = 12345;</code> - Overwrites the same memory where age was stored</li>
+                                    </ul>
+                                </li>
+                                
+                                <li><strong>Second Output (iii & iv):</strong> Shows the newly assigned address values.</li>
+                                
+                                <li><strong>Memory Sharing Effect (v & vi):</strong> When accessing <code>p.details.name</code> and <code>p.details.age</code> again, they now contain the data from <code>p.addr</code> because they share the same memory locations!</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="visual-example">
+                            <h5>Memory Layout Visualization:</h5>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div>
+                                    <h6>After First Assignment:</h6>
+                                    <div class="memory-box" style="background: #e8f5e8;">
+                                        Memory: "Rusiru" + 30<br>
+                                        (accessible as details.name and details.age)
+                                    </div>
+                                </div>
+                                <div>
+                                    <h6>After Second Assignment:</h6>
+                                    <div class="memory-box" style="background: #ffeb3b;">
+                                        Same Memory: "Borella" + 12345<br>
+                                        (now accessible as addr.city and addr.pincode<br>
+                                        OR as details.name and details.age)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <div class="exercise-box">
+                <h4>Question 4(d) - Nested Structures Output [3 marks]</h4>
+                <p><strong>Program to Analyze:</strong></p>
+                <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="keyword">struct</span> Point {
+    <span class="keyword">int</span> x, y;
+};
+
+<span class="keyword">struct</span> Rectangle {
+    <span class="keyword">struct</span> Point topLeft;
+    <span class="keyword">struct</span> Point bottomRight;
+};
+
+<span class="keyword">int</span> calculateArea(<span class="keyword">struct</span> Rectangle rect) {
+    <span class="keyword">int</span> length = rect.bottomRight.x - rect.topLeft.x;
+    <span class="keyword">int</span> width = rect.bottomRight.y - rect.topLeft.y;
+    <span class="keyword">return</span> length * width;
+}
+
+<span class="keyword">int</span> main() {
+    <span class="keyword">struct</span> Rectangle rect = {{<span class="number">1</span>, <span class="number">2</span>}, {<span class="number">8</span>, <span class="number">10</span>}};
+
+    printf(<span class="string">"Top Left: (%d, %d)\n"</span>, rect.topLeft.x, rect.topLeft.y);      <span class="comment">// (i)</span>
+    printf(<span class="string">"Bottom Right: (%d, %d)\n"</span>, rect.bottomRight.x, rect.bottomRight.y); <span class="comment">// (ii)</span>
+
+    <span class="keyword">int</span> area = calculateArea(rect);
+    printf(<span class="string">"Area of the Rectangle: %d\n"</span>, area);                      <span class="comment">// (iii)</span>
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+                </div>
+                
+                <details style="margin-top: 15px;">
+                    <summary><strong>🔍 Click for Output & Step-by-Step Calculation</strong></summary>
+                    <div style="margin-top: 15px;">
+                        <div class="output-box">
+                            <h5>Program Output:</h5>
+                            <pre>(i)  Top Left: (1, 2)
+(ii) Bottom Right: (8, 10)
+(iii) Area of the Rectangle: 56</pre>
+                        </div>
+                        
+                        <div class="explanation-text">
+                            <h5>Step-by-Step Analysis:</h5>
+                            
+                            <h6>1. Structure Initialization:</h6>
+                            <p><code>struct Rectangle rect = {{1, 2}, {8, 10}};</code></p>
+                            <ul>
+                                <li><code>rect.topLeft</code> is initialized with x=1, y=2</li>
+                                <li><code>rect.bottomRight</code> is initialized with x=8, y=10</li>
+                            </ul>
+                            
+                            <h6>2. Output (i) & (ii):</h6>
+                            <p>Direct access to nested structure members using dot notation.</p>
+                            
+                            <h6>3. Area Calculation:</h6>
+                            <div class="step-by-step" style="font-size: 14px;">
+                                <p><strong>In calculateArea function:</strong></p>
+                                <ul>
+                                    <li><code>length = rect.bottomRight.x - rect.topLeft.x</code></li>
+                                    <li><code>length = 8 - 1 = 7</code></li>
+                                    <li><code>width = rect.bottomRight.y - rect.topLeft.y</code></li>
+                                    <li><code>width = 10 - 2 = 8</code></li>
+                                    <li><code>area = length * width = 7 * 8 = 56</code></li>
+                                </ul>
+                            </div>
+                            
+                            <h6>4. Output (iii):</h6>
+                            <p>The calculated area (56) is returned and printed.</p>
+                        </div>
+                        
+                        <div class="visual-example">
+                            <h5>Rectangle Visualization:</h5>
+                            <div style="text-align: center; font-family: monospace; background: #f0f8ff; padding: 20px; border-radius: 10px;">
+                                <pre>
+    (1,2) ●─────────────● (8,2)
+          │             │
+          │             │ width = 8
+          │             │
+    (1,10)●─────────────● (8,10)
+              length = 7
+                            </pre>
+                                <p><strong>Area = length × width = 7 × 8 = 56</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <div class="analogy-box">
+                <h4>🎓 Exam Tips & Key Takeaways</h4>
+                <h5>For Pointer Questions:</h5>
+                <ul>
+                    <li><strong>Remember the const variations:</strong>
+                        <ul>
+                            <li><code>const int *p</code> - pointer to constant (can't change value)</li>
+                            <li><code>int * const p</code> - constant pointer (can't change address)</li>
+                            <li><code>const int * const p</code> - constant pointer to constant (can't change either)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Pointer arithmetic:</strong> <code>ptr + n</code> moves n elements, not n bytes</li>
+                    <li><strong>Array-pointer relationship:</strong> <code>arr[i]</code> is equivalent to <code>*(ptr + i)</code></li>
+                </ul>
+                
+                <h5>For Structure/Union Questions:</h5>
+                <ul>
+                    <li><strong>Structure syntax:</strong> All members need data types</li>
+                    <li><strong>Union memory sharing:</strong> Only the last assigned member is valid</li>
+                    <li><strong>Nested structures:</strong> Use dot notation for each level</li>
+                    <li><strong>Size calculations:</strong> Struct = sum of members + padding, Union = largest member</li>
+                </ul>
+                
+                <h5>General Exam Strategy:</h5>
+                <ul>
+                    <li><strong>Read carefully:</strong> Pay attention to const keywords and pointer levels</li>
+                    <li><strong>Trace execution:</strong> Follow the program step by step</li>
+                    <li><strong>Check syntax:</strong> Look for missing data types or semicolons</li>
+                    <li><strong>Understand memory:</strong> Know how structures and unions use memory differently</li>
+                </ul>
+            </div>
+        </div>
+        </div>
+
+        <!-- Introduction Section -->
+        <div id="intro" class="section active">
+            <h2>📚 Introduction to Advanced C Programming</h2>
+            
+            <div class="beginner-note">
+                <h4>👋 Welcome, New Programmers!</h4>
+                <p>This tutorial is designed for students who are completely new to these concepts. We'll start with the very basics and build up to more complex examples. Don't worry if some terms seem unfamiliar at first - we'll explain everything step by step!</p>
+            </div>
+
+            <h3>What We'll Learn Today</h3>
+            
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>🔗 Pointers</h4>
+                    <p><strong>What is it?</strong> A way to indirectly access and modify variables by storing their memory addresses.</p>
+                    <p><strong>Why learn it?</strong> Essential for dynamic memory, efficient programming, and understanding how computers work.</p>
+                    <p><strong>Real-world analogy:</strong> Like having someone's home address to visit them instead of searching the entire city.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h4>🏗️ Structures</h4>
+                    <p><strong>What is it?</strong> A way to group related information together under one name.</p>
+                    <p><strong>Why learn it?</strong> Perfect for organizing complex data like student records, employee information, etc.</p>
+                    <p><strong>Real-world analogy:</strong> Like a filing cabinet where you can store different types of documents about one person.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h4>🔄 Unions</h4>
+                    <p><strong>What is it?</strong> A way to use the same memory space for different types of data.</p>
+                    <p><strong>Why learn it?</strong> Saves memory when you only need one type of data at a time.</p>
+                    <p><strong>Real-world analogy:</strong> Like a parking space that can hold either a car OR a motorcycle, but not both simultaneously.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h4>📁 File Handling</h4>
+                    <p><strong>What is it?</strong> Reading data from files and writing data to files on your computer.</p>
+                    <p><strong>Why learn it?</strong> Essential for saving and loading data permanently.</p>
+                    <p><strong>Real-world analogy:</strong> Like reading from a book or writing in a diary - but your program does it automatically.</p>
+                </div>
+            </div>
+
+            <div class="progress-indicator">
+                <div class="progress-step active">Start Here</div>
+                <div class="progress-step">Learn Pointers</div>
+                <div class="progress-step">Master Structures</div>
+                <div class="progress-step">Understand Unions</div>
+                <div class="progress-step">File Operations</div>
+                <div class="progress-step">Practice & Review</div>
+            </div>
+
+            <h3>Prerequisites - What You Should Know</h3>
+            
+            <div class="step-by-step">
+                <h4>Before starting this tutorial, make sure you understand:</h4>
+                <ol>
+                    <li><strong>Basic C syntax:</strong> Variables, functions, loops, if statements</li>
+                    <li><strong>Data types:</strong> int, float, char, arrays</li>
+                    <li><strong>Functions:</strong> How to write and call functions</li>
+                    <li><strong>Arrays:</strong> Basic array declaration and usage</li>
+                </ol>
+                
+                <p><strong>Don't worry if you're not 100% confident with these!</strong> We'll review important concepts as we go.</p>
+            </div>
+
+            <h3>Quick Review: Variables and Memory</h3>
+            
+            <div class="analogy-box">
+                <h4>🏠 Think of Computer Memory Like a Neighborhood</h4>
+                <p>Imagine your computer's memory as a street with numbered houses:</p>
+                <ul>
+                    <li><strong>Each house has an address</strong> (like memory address 1000, 1004, 1008)</li>
+                    <li><strong>Each house can store one piece of information</strong> (like a number or letter)</li>
+                    <li><strong>Variables are like name tags</strong> we put on houses to remember what's stored there</li>
+                </ul>
+            </div>
+
+            <div class="code-explanation">
+                <div class="code-block">
+<span class="comment">// When you declare a variable:</span>
+<span class="keyword">int</span> age = <span class="number">25</span>;
+
+<span class="comment">// The computer:</span>
+<span class="comment">// 1. Finds an empty "house" in memory</span>
+<span class="comment">// 2. Stores the value 25 there</span>
+<span class="comment">// 3. Remembers this house as "age"</span>
+
+printf(<span class="string">"Age is: %d\n"</span>, age);
+<span class="comment">// This goes to the "age" house and gets the value</span>
+                </div>
+                
+                <div class="explanation-text">
+                    <h4>What's Happening Here?</h4>
+                    <ol>
+                        <li><strong>Declaration:</strong> <code>int age</code> reserves space for an integer</li>
+                        <li><strong>Assignment:</strong> <code>= 25</code> puts the value 25 in that space</li>
+                        <li><strong>Usage:</strong> <code>age</code> retrieves the value from that memory location</li>
+                    </ol>
+                    <p>This foundation is crucial for understanding pointers, which work with these memory addresses directly!</p>
+                </div>
+            </div>
+
+            <div class="important-note">
+                <h4>💡 Learning Strategy</h4>
+                <p>As we progress through this tutorial:</p>
+                <ul>
+                    <li><strong>Read slowly</strong> - These concepts build on each other</li>
+                    <li><strong>Try the examples</strong> - Type them out and run them</li>
+                    <li><strong>Ask questions</strong> - If something doesn't make sense, review that section</li>
+                    <li><strong>Practice regularly</strong> - Use the exercises at the end</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Enhanced Pointers Section -->
+        <div id="pointers" class="section">
+            <h2>🔗 Pointers - Your Gateway to Advanced Programming</h2>
+            
+            <div class="beginner-note">
+                <h4>🤔 "What exactly IS a pointer?"</h4>
+                <p>If you've never heard of pointers before, don't worry! By the end of this section, you'll understand exactly what they are and why they're so powerful.</p>
+            </div>
+
+            <h3>Understanding Memory Addresses First</h3>
+            
+            <div class="analogy-box">
+                <h4>🏠 The Address Analogy</h4>
+                <p><strong>Imagine you want to send a letter to your friend John.</strong></p>
+                <ul>
+                    <li>You need John's <strong>address</strong> (like "123 Oak Street")</li>
+                    <li>The address isn't John himself - it's just information about <strong>where to find</strong> John</li>
+                    <li>With the address, you can visit John, send him mail, or tell others how to find him</li>
+                </ul>
+                <p><strong>Pointers work exactly the same way with computer memory!</strong></p>
+            </div>
+
+            <div class="visual-example">
+                <h4>Memory Layout Example</h4>
+                <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; margin: 20px 0;">
+                    <div style="text-align: center;">
+                        <div class="memory-box" style="background: #e8f5e8;">
+                            <strong>Variable: x</strong><br>
+                            Value: 42<br>
+                            Address: 1000
+                        </div>
+                        <p style="margin-top: 10px;">This is like John's house<br>with the number 42 inside</p>
+                    </div>
+                    <div class="pointer-arrow">→</div>
+                    <div style="text-align: center;">
+                        <div class="memory-box" style="background: #ffe8e8;">
+                            <strong>Pointer: ptr</strong><br>
+                            Value: 1000<br>
+                            Address: 2000
+                        </div>
+                        <p style="margin-top: 10px;">This is like having<br>John's address written down</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Your First Pointer Program</h3>
+            
+            <div class="step-by-step">
+                <h4>Let's create our first pointer step by step:</h4>
+                <ol>
+                    <li><strong>Create a regular variable</strong> to point to</li>
+                    <li><strong>Create a pointer variable</strong> to store the address</li>
+                    <li><strong>Make the pointer point to our variable</strong></li>
+                    <li><strong>Use the pointer to access the value</strong></li>
+                </ol>
+            </div>
+
+            <div class="code-explanation">
+                <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="keyword">int</span> main() {
+    <span class="comment">// Step 1: Create a regular variable</span>
+    <span class="keyword">int</span> number = <span class="number">42</span>;
+    
+    <span class="comment">// Step 2: Create a pointer variable</span>
+    <span class="comment">// int* means "pointer to int"</span>
+    <span class="keyword">int</span> *pointer;
+    
+    <span class="comment">// Step 3: Make pointer point to number</span>
+    <span class="comment">// &number means "address of number"</span>
+    pointer = &number;
+    
+    <span class="comment">// Step 4: Use the pointer</span>
+    printf(<span class="string">"Direct access: %d\n"</span>, number);
+    printf(<span class="string">"Through pointer: %d\n"</span>, *pointer);
+    
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+                </div>
+                
+                <div class="explanation-text">
+                    <h4>Breaking Down Each Line:</h4>
+                    <ul>
+                        <li><strong>int *pointer;</strong> - Creates a pointer that can point to integers</li>
+                        <li><strong>&number</strong> - Gets the memory address of 'number'</li>
+                        <li><strong>*pointer</strong> - Goes to the address and gets the value stored there</li>
+                    </ul>
+                    <p><strong>Key Symbols:</strong></p>
+                    <ul>
+                        <li><strong>*</strong> (in declaration) = "pointer to"</li>
+                        <li><strong>&</strong> = "address of"</li>
+                        <li><strong>*</strong> (when using) = "value at address"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="output-box">
+                <h4>Expected Output:</h4>
+                <pre>Direct access: 42
+Through pointer: 42</pre>
+            </div>
+
+            <h3>Why Do We Need Pointers?</h3>
+            
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>🔄 Modify Variables in Functions</h4>
+                    <p>Normal variables get copied when passed to functions. Pointers let you modify the original!</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h4>💾 Save Memory</h4>
+                    <p>Instead of copying large amounts of data, just pass a small address!</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h4>🏗️ Dynamic Memory</h4>
+                    <p>Create variables during program execution based on user needs!</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h4>📊 Complex Data Structures</h4>
+                    <p>Build linked lists, trees, and other advanced structures!</p>
+                </div>
+            </div>
+
+            <h3>Practical Example: Swapping Two Numbers</h3>
+            
+            <div class="beginner-note">
+                <h4>🧐 The Problem</h4>
+                <p>Imagine you want to write a function that swaps two numbers. Without pointers, this is impossible because function parameters are just copies!</p>
+            </div>
+
+            <div class="code-explanation">
+                <div class="code-block">
+<span class="comment">// This WON'T work - why?</span>
+<span class="keyword">void</span> wrong_swap(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+    <span class="keyword">int</span> temp = a;
+    a = b;
+    b = temp;
+    <span class="comment">// Only swaps the copies!</span>
+}
+
+<span class="comment">// This WILL work - using pointers!</span>
+<span class="keyword">void</span> correct_swap(<span class="keyword">int</span> *a, <span class="keyword">int</span> *b) {
+    <span class="keyword">int</span> temp = *a;  <span class="comment">// Get value at address a</span>
+    *a = *b;         <span class="comment">// Put value from b into a</span>
+    *b = temp;       <span class="comment">// Put temp into b</span>
+}
+
+<span class="keyword">int</span> main() {
+    <span class="keyword">int</span> x = <span class="number">10</span>, y = <span class="number">20</span>;
+    
+    printf(<span class="string">"Before: x=%d, y=%d\n"</span>, x, y);
+    
+    <span class="comment">// Pass addresses, not values</span>
+    correct_swap(&x, &y);
+    
+    printf(<span class="string">"After: x=%d, y=%d\n"</span>, x, y);
+    
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+                </div>
+                
+                <div class="explanation-text">
+                    <h4>Why Pointers Work Here:</h4>
+                    <ol>
+                        <li><strong>We pass addresses</strong> (&x, &y) instead of values</li>
+                        <li><strong>Function receives addresses</strong> in pointer parameters</li>
+                        <li><strong>We modify values at those addresses</strong> using *</li>
+                        <li><strong>Original variables change</strong> because we modified their memory locations</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="output-box">
+                <h4>Expected Output:</h4>
+                <pre>Before: x=10, y=20
+After: x=20, y=10</pre>
+            </div>
+
+            <h3>Understanding Const with Pointers</h3>
+            
+            <div class="important-note">
+                <h4>🚨 This is Confusing for Beginners!</h4>
+                <p>The combination of <code>const</code> and pointers can be tricky. Let's break it down with simple rules.</p>
+            </div>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>📍 Pointer to Const</h4>
+                    <code>const int *ptr</code>
+                    <p><strong>Rule:</strong> Can't change the VALUE through this pointer</p>
+                    <p><strong>Allowed:</strong> Point to different variables</p>
+                    <p><strong>Analogy:</strong> Read-only access to different books</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h4>🔒 Const Pointer</h4>
+                    <code>int * const ptr</code>
+                    <p><strong>Rule:</strong> Can't change WHERE the pointer points</p>
+                    <p><strong>Allowed:</strong> Change the value at that location</p>
+                    <p><strong>Analogy:</strong> Permanent address, can redecorate the house</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h4>🔐 Const Pointer to Const</h4>
+                    <code>const int * const ptr</code>
+                    <p><strong>Rule:</strong> Can't change ANYTHING</p>
+                    <p><strong>Analogy:</strong> Museum display - look but don't touch</p>
+                </div>
+            </div>
+
+            <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="keyword">int</span> main() {
+    <span class="keyword">int</span> a = <span class="number">10</span>, b = <span class="number">20</span>;
+    
+    <span class="comment">// 1. Pointer to const - can't change value</span>
+    <span class="keyword">const int</span> *ptr1 = &a;
+    printf(<span class="string">"Value: %d\n"</span>, *ptr1);  <span class="comment">// OK - reading</span>
+    <span class="comment">// *ptr1 = 30;  // ERROR! Can't change value</span>
+    ptr1 = &b;      <span class="comment">// OK - can point elsewhere</span>
+    
+    <span class="comment">// 2. Const pointer - can't change address</span>
+    <span class="keyword">int</span> * <span class="keyword">const</span> ptr2 = &a;
+    *ptr2 = <span class="number">30</span>;    <span class="comment">// OK - can change value</span>
+    <span class="comment">// ptr2 = &b;  // ERROR! Can't point elsewhere</span>
+    
+    <span class="comment">// 3. Const pointer to const - can't change anything</span>
+    <span class="keyword">const int</span> * <span class="keyword">const</span> ptr3 = &a;
+    printf(<span class="string">"Value: %d\n"</span>, *ptr3);  <span class="comment">// OK - reading only</span>
+    <span class="comment">// *ptr3 = 40;  // ERROR! Can't change value</span>
+    <span class="comment">// ptr3 = &b;   // ERROR! Can't change address</span>
+    
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+            </div>
+
+            <h3>Pointers and Arrays - Best Friends!</h3>
+            
+            <div class="analogy-box">
+                <h4>🏠 Arrays as Apartment Buildings</h4>
+                <p>Think of an array as an apartment building:</p>
+                <ul>
+                    <li><strong>Each apartment has a number</strong> (index 0, 1, 2, 3...)</li>
+                    <li><strong>The building has a street address</strong> (array name points to first apartment)</li>
+                    <li><strong>You can walk from one apartment to the next</strong> (pointer arithmetic)</li>
+                </ul>
+            </div>
+
+            <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="keyword">int</span> main() {
+    <span class="keyword">int</span> numbers[] = {<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>};
+    <span class="keyword">int</span> *ptr = numbers;  <span class="comment">// Same as &numbers[0]</span>
+    
+    printf(<span class="string">"Array access methods:\n"</span>);
+    
+    <span class="comment">// Method 1: Traditional array indexing</span>
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {
+        printf(<span class="string">"numbers[%d] = %d\n"</span>, i, numbers[i]);
+    }
+    
+    printf(<span class="string">"\nPointer access methods:\n"</span>);
+    
+    <span class="comment">// Method 2: Pointer with indexing</span>
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {
+        printf(<span class="string">"*(ptr + %d) = %d\n"</span>, i, *(ptr + i));
+    }
+    
+    printf(<span class="string">"\nMoving through array with pointer:\n"</span>);
+    
+    <span class="comment">// Method 3: Moving the pointer</span>
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {
+        printf(<span class="string">"*ptr = %d (address: %p)\n"</span>, *ptr, (<span class="keyword">void</span>*)ptr);
+        ptr++;  <span class="comment">// Move to next element</span>
+    }
+    
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+            </div>
+
+            <h3>Common Beginner Mistakes</h3>
+            
+            <div class="warning-box">
+                <h4>⚠️ Mistake 1: Forgetting the *</h4>
+                <div class="code-block">
+<span class="keyword">int</span> x = <span class="number">10</span>;
+<span class="keyword">int</span> *ptr = &x;
+
+<span class="comment">// WRONG:</span>
+printf(<span class="string">"%d\n"</span>, ptr);   <span class="comment">// Prints address, not value!</span>
+
+<span class="comment">// CORRECT:</span>
+printf(<span class="string">"%d\n"</span>, *ptr);  <span class="comment">// Prints 10</span>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Mistake 2: Uninitialized Pointers</h4>
+                <div class="code-block">
+<span class="keyword">int</span> *ptr;        <span class="comment">// DANGEROUS! Points to random memory</span>
+<span class="comment">// *ptr = 10;    // Could crash your program!</span>
+
+<span class="comment">// CORRECT:</span>
+<span class="keyword">int</span> x = <span class="number">5</span>;
+<span class="keyword">int</span> *ptr = &x;  <span class="comment">// Now it's safe to use</span>
+*ptr = <span class="number">10</span>;        <span class="comment">// OK!</span>
+                </div>
+            </div>
+
+            <div class="troubleshooting">
+                <h4>🔧 Debugging Pointer Problems</h4>
+                <ol>
+                    <li><strong>Always initialize pointers</strong> before using them</li>
+                    <li><strong>Check if pointer is NULL</strong> before dereferencing</li>
+                    <li><strong>Use %p to print addresses</strong> when debugging</li>
+                    <li><strong>Remember: ptr gives address, *ptr gives value</strong></li>
+                </ol>
+            </div>
+
+            <div class="exercise-box">
+                <h4>🏋️ Practice Exercise 1</h4>
+                <p><strong>Challenge:</strong> Write a function that finds the largest number in an array using pointers.</p>
+                <p><strong>Requirements:</strong></p>
+                <ul>
+                    <li>Function should take a pointer to int and array size</li>
+                    <li>Use pointer arithmetic (no array indexing)</li>
+                    <li>Return the largest value</li>
+                </ul>
+                <details style="margin-top: 10px;">
+                    <summary><strong>Click for Solution</strong></summary>
+                    <div class="code-block" style="margin-top: 10px;">
+<span class="keyword">int</span> findLargest(<span class="keyword">int</span> *arr, <span class="keyword">int</span> size) {
+    <span class="keyword">int</span> largest = *arr;  <span class="comment">// First element</span>
+    
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; i++) {
+        <span class="keyword">if</span>(*(arr + i) > largest) {
+            largest = *(arr + i);
+        }
+    }
+    
+    <span class="keyword">return</span> largest;
+}
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- Enhanced Structures Section -->
+        <div id="structures" class="section">
+            <h2>🏗️ Structures - Building Complex Data Types</h2>
+            
+            <div class="beginner-note">
+                <h4>🤔 "Why do I need structures?"</h4>
+                <p>Imagine you're organizing information about students. You could use separate variables for each piece of data, but that gets messy quickly. Structures let you bundle related information together!</p>
+            </div>
+
+            <h3>The Problem Structures Solve</h3>
+            
+            <div class="analogy-box">
+                <h4>📋 The Student Information Problem</h4>
+                <p><strong>Without structures, managing student data is chaotic:</strong></p>
+                <div class="code-block">
+<span class="comment">// Messy way - separate variables for each student</span>
+<span class="keyword">int</span> student1_id = <span class="number">101</span>;
+<span class="keyword">char</span> student1_name[<span class="number">50</span>] = <span class="string">"Alice"</span>;
+<span class="keyword">float</span> student1_gpa = <span class="number">3.8</span>;
+
+<span class="keyword">int</span> student2_id = <span class="number">102</span>;
+<span class="keyword">char</span> student2_name[<span class="number">50</span>] = <span class="string">"Bob"</span>;
+<span class="keyword">float</span> student2_gpa = <span class="number">3.5</span>;
+
+<span class="comment">// This gets unmanageable very quickly!</span>
+                </div>
+                <p><strong>With structures, it's organized and clean:</strong></p>
+                <div class="code-block">
+<span class="keyword">struct</span> Student {
+    <span class="keyword">int</span> id;
+    <span class="keyword">char</span> name[<span class="number">50</span>];
+    <span class="keyword">float</span> gpa;
+};
+
+<span class="keyword">struct</span> Student student1 = {<span class="number">101</span>, <span class="string">"Alice"</span>, <span class="number">3.8</span>};
+<span class="keyword">struct</span> Student student2 = {<span class="number">102</span>, <span class="string">"Bob"</span>, <span class="number">3.5</span>};
+                </div>
+            </div>
+
+            <h3>Your First Structure</h3>
+            
+            <div class="step-by-step">
+                <h4>Creating a structure involves these steps:</h4>
+                <ol>
+                    <li><strong>Define the structure template</strong> - What data will it hold?</li>
+                    <li><strong>Create structure variables</strong> - Actual instances of the structure</li>
+                    <li><strong>Initialize the data</strong> - Put values into the structure</li>
+                    <li><strong>Access the data</strong> - Use dot notation to get/set values</li>
+                </ol>
+            </div>
+
+            <div class="code-explanation">
+                <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;string.h&gt;</span>
+
+<span class="comment">// Step 1: Define the structure template</span>
+<span class="keyword">struct</span> Person {
+    <span class="keyword">char</span> name[<span class="number">50</span>];     <span class="comment">// Member 1</span>
+    <span class="keyword">int</span> age;           <span class="comment">// Member 2</span>
+    <span class="keyword">float</span> height;     <span class="comment">// Member 3</span>
+    <span class="keyword">char</span> city[<span class="number">30</span>];     <span class="comment">// Member 4</span>
+};
+
+<span class="keyword">int</span> main() {
+    <span class="comment">// Step 2: Create structure variables</span>
+    <span class="keyword">struct</span> Person person1;
+    <span class="keyword">struct</span> Person person2;
+    
+    <span class="comment">// Step 3: Initialize person1</span>
+    strcpy(person1.name, <span class="string">"John Doe"</span>);
+    person1.age = <span class="number">25</span>;
+    person1.height = <span class="number">5.9</span>;
+    strcpy(person1.city, <span class="string">"New York"</span>);
+    
+    <span class="comment">// Alternative initialization for person2</span>
+    <span class="keyword">struct</span> Person person2_init = {
+        <span class="string">"Jane Smith"</span>, <span class="number">23</span>, <span class="number">5.6</span>, <span class="string">"Los Angeles"</span>
+    };
+    person2 = person2_init;
+    
+    <span class="comment">// Step 4: Access and display the data</span>
+    printf(<span class="string">"Person 1 Information:\n"</span>);
+    printf(<span class="string">"Name: %s\n"</span>, person1.name);
+    printf(<span class="string">"Age: %d years\n"</span>, person1.age);
+    printf(<span class="string">"Height: %.1f feet\n"</span>, person1.height);
+    printf(<span class="string">"City: %s\n\n"</span>, person1.city);
+    
+    printf(<span class="string">"Person 2 Information:\n"</span>);
+    printf(<span class="string">"Name: %s\n"</span>, person2.name);
+    printf(<span class="string">"Age: %d years\n"</span>, person2.age);
+    printf(<span class="string">"Height: %.1f feet\n"</span>, person2.height);
+    printf(<span class="string">"City: %s\n"</span>, person2.city);
+    
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+                </div>
+                
+                <div class="explanation-text">
+                    <h4>Understanding Each Part:</h4>
+                    <ul>
+                        <li><strong>struct Person { ... };</strong> - Defines the template (blueprint)</li>
+                        <li><strong>struct Person person1;</strong> - Creates an actual variable</li>
+                        <li><strong>person1.name</strong> - Accesses the name member using dot notation</li>
+                        <li><strong>strcpy()</strong> - Copies strings into character arrays</li>
+                    </ul>
+                    <p><strong>Important:</strong> The structure definition doesn't create any variables - it's just a template!</p>
+                </div>
+            </div>
+
+            <div class="output-box">
+                <h4>Expected Output:</h4>
+                <pre>Person 1 Information:
+Name: John Doe
+Age: 25 years
+Height: 5.9 feet
+City: New York
+
+Person 2 Information:
+Name: Jane Smith
+Age: 23 years
+Height: 5.6 feet
+City: Los Angeles</pre>
+            </div>
+
+            <h3>Working with Arrays of Structures</h3>
+            
+            <div class="beginner-note">
+                <h4>💡 Why Arrays of Structures?</h4>
+                <p>When you need to store information about multiple similar items (like a class of students, a team of employees, etc.), arrays of structures are perfect!</p>
+            </div>
+
+            <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;string.h&gt;</span>
+
+<span class="keyword">struct</span> Student {
+    <span class="keyword">int</span> id;
+    <span class="keyword">char</span> name[<span class="number">30</span>];
+    <span class="keyword">float</span> marks[<span class="number">3</span>];  <span class="comment">// Marks in 3 subjects</span>
+    <span class="keyword">float</span> average;
+};
+
+<span class="keyword">void</span> calculateAverage(<span class="keyword">struct</span> Student *s) {
+    <span class="keyword">float</span> sum = <span class="number">0</span>;
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) {
+        sum += s-&gt;marks[i];
+    }
+    s-&gt;average = sum / <span class="number">3.0</span>;
+}
+
+<span class="keyword">void</span> displayStudent(<span class="keyword">struct</span> Student s) {
+    printf(<span class="string">"ID: %d | Name: %s | Average: %.2f\n"</span>, 
+           s.id, s.name, s.average);
+}
+
+<span class="keyword">int</span> main() {
+    <span class="comment">// Array of 3 students</span>
+    <span class="keyword">struct</span> Student class[<span class="number">3</span>] = {
+        {<span class="number">101</span>, <span class="string">"Alice"</span>, {<span class="number">85.0</span>, <span class="number">90.0</span>, <span class="number">88.0</span>}, <span class="number">0</span>},
+        {<span class="number">102</span>, <span class="string">"Bob"</span>,   {<span class="number">78.0</span>, <span class="number">82.0</span>, <span class="number">80.0</span>}, <span class="number">0</span>},
+        {<span class="number">103</span>, <span class="string">"Carol"</span>, {<span class="number">92.0</span>, <span class="number">88.0</span>, <span class="number">94.0</span>}, <span class="number">0</span>}
+    };
+    
+    printf(<span class="string">"Class Report:\n"</span>);
+    printf(<span class="string">"=============\n"</span>);
+    
+    <span class="comment">// Calculate averages and display</span>
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) {
+        calculateAverage(&class[i]);
+        displayStudent(class[i]);
+    }
+    
+    <span class="comment">// Find the student with highest average</span>
+    <span class="keyword">int</span> topStudent = <span class="number">0</span>;
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">3</span>; i++) {
+        <span class="keyword">if</span>(class[i].average > class[topStudent].average) {
+            topStudent = i;
+        }
+    }
+    
+    printf(<span class="string">"\nTop Student: %s with %.2f average\n"</span>,
+           class[topStudent].name, class[topStudent].average);
+    
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+            </div>
+
+            <h3>Pointers to Structures</h3>
+            
+            <div class="important-note">
+                <h4>🔗 Why Use Pointers with Structures?</h4>
+                <ul>
+                    <li><strong>Efficiency:</strong> Avoid copying large structures</li>
+                    <li><strong>Modification:</strong> Allow functions to modify the original structure</li>
+                    <li><strong>Memory:</strong> Save memory when passing to functions</li>
+                </ul>
+            </div>
+
+            <div class="analogy-box">
+                <h4>📋 The File Cabinet Analogy</h4>
+                <p>Think of a structure as a file cabinet:</p>
+                <ul>
+                    <li><strong>Regular access:</strong> <code>cabinet.drawer1</code> - You walk to the cabinet and open drawer 1</li>
+                    <li><strong>Pointer access:</strong> <code>cabinet_ptr-&gt;drawer1</code> - You have the cabinet's address and ask someone to open drawer 1</li>
+                </ul>
+                <p>Both get the same result, but the pointer method is more efficient for large cabinets!</p>
+            </div>
+
+            <div class="code-explanation">
+                <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;string.h&gt;</span>
+
+<span class="keyword">struct</span> Book {
+    <span class="keyword">char</span> title[<span class="number">50</span>];
+    <span class="keyword">char</span> author[<span class="number">30</span>];
+    <span class="keyword">int</span> pages;
+    <span class="keyword">float</span> price;
+};
+
+<span class="comment">// Function that takes structure pointer</span>
+<span class="keyword">void</span> displayBook(<span class="keyword">struct</span> Book *book_ptr) {
+    printf(<span class="string">"Book Information:\n"</span>);
+    printf(<span class="string">"Title: %s\n"</span>, book_ptr-&gt;title);
+    printf(<span class="string">"Author: %s\n"</span>, book_ptr-&gt;author);
+    printf(<span class="string">"Pages: %d\n"</span>, book_ptr-&gt;pages);
+    printf(<span class="string">"Price: $%.2f\n\n"</span>, book_ptr-&gt;price);
+}
+
+<span class="comment">// Function that modifies structure through pointer</span>
+<span class="keyword">void</span> applyDiscount(<span class="keyword">struct</span> Book *book_ptr, <span class="keyword">float</span> discount) {
+    book_ptr-&gt;price *= (<span class="number">1.0</span> - discount);
+    printf(<span class="string">"Applied %.0f%% discount to %s\n"</span>, 
+           discount * <span class="number">100</span>, book_ptr-&gt;title);
+}
+
+<span class="keyword">int</span> main() {
+    <span class="comment">// Create and initialize book</span>
+    <span class="keyword">struct</span> Book myBook;
+    strcpy(myBook.title, <span class="string">"C Programming Guide"</span>);
+    strcpy(myBook.author, <span class="string">"John Smith"</span>);
+    myBook.pages = <span class="number">450</span>;
+    myBook.price = <span class="number">29.99</span>;
+    
+    <span class="comment">// Display original book info</span>
+    displayBook(&myBook);
+    
+    <span class="comment">// Apply 20% discount</span>
+    applyDiscount(&myBook, <span class="number">0.20</span>);
+    
+    <span class="comment">// Display updated book info</span>
+    displayBook(&myBook);
+    
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+                </div>
+                
+                <div class="explanation-text">
+                    <h4>Key Points About Structure Pointers:</h4>
+                    <ul>
+                        <li><strong>-&gt; operator:</strong> Used to access members through a pointer</li>
+                        <li><strong>(*ptr).member</strong> is the same as <strong>ptr-&gt;member</strong></li>
+                        <li><strong>&myBook</strong> passes the address of the structure</li>
+                        <li><strong>Changes made through pointer</strong> affect the original structure</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Nested Structures - Structures Inside Structures</h3>
+            
+            <div class="beginner-note">
+                <h4>🎯 Real-World Example</h4>
+                <p>Think about a person's information - they have basic details AND an address. The address itself has multiple parts. This is perfect for nested structures!</p>
+            </div>
+
+            <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;string.h&gt;</span>
+
+<span class="comment">// Inner structure for date</span>
+<span class="keyword">struct</span> Date {
+    <span class="keyword">int</span> day;
+    <span class="keyword">int</span> month;
+    <span class="keyword">int</span> year;
+};
+
+<span class="comment">// Inner structure for address</span>
+<span class="keyword">struct</span> Address {
+    <span class="keyword">char</span> street[<span class="number">50</span>];
+    <span class="keyword">char</span> city[<span class="number">30</span>];
+    <span class="keyword">char</span> state[<span class="number">20</span>];
+    <span class="keyword">int</span> zipcode;
+};
+
+<span class="comment">// Outer structure containing nested structures</span>
+<span class="keyword">struct</span> Employee {
+    <span class="keyword">int</span> id;
+    <span class="keyword">char</span> name[<span class="number">40</span>];
+    <span class="keyword">struct</span> Date birthdate;    <span class="comment">// Nested structure</span>
+    <span class="keyword">struct</span> Date hiredate;     <span class="comment">// Nested structure</span>
+    <span class="keyword">struct</span> Address address;   <span class="comment">// Nested structure</span>
+    <span class="keyword">float</span> salary;
+};
+
+<span class="keyword">void</span> printEmployee(<span class="keyword">struct</span> Employee *emp) {
+    printf(<span class="string">"Employee Details:\n"</span>);
+    printf(<span class="string">"================\n"</span>);
+    printf(<span class="string">"ID: %d\n"</span>, emp-&gt;id);
+    printf(<span class="string">"Name: %s\n"</span>, emp-&gt;name);
+    printf(<span class="string">"Birth Date: %d/%d/%d\n"</span>, 
+           emp-&gt;birthdate.month, emp-&gt;birthdate.day, emp-&gt;birthdate.year);
+    printf(<span class="string">"Hire Date: %d/%d/%d\n"</span>,
+           emp-&gt;hiredate.month, emp-&gt;hiredate.day, emp-&gt;hiredate.year);
+    printf(<span class="string">"Address: %s\n"</span>, emp-&gt;address.street);
+    printf(<span class="string">"         %s, %s %d\n"</span>,
+           emp-&gt;address.city, emp-&gt;address.state, emp-&gt;address.zipcode);
+    printf(<span class="string">"Salary: $%.2f\n\n"</span>, emp-&gt;salary);
+}
+
+<span class="keyword">int</span> main() {
+    <span class="comment">// Initialize employee with nested structures</span>
+    <span class="keyword">struct</span> Employee emp1 = {
+        <span class="number">1001</span>,                           <span class="comment">// id</span>
+        <span class="string">"Sarah Johnson"</span>,                <span class="comment">// name</span>
+        {<span class="number">15</span>, <span class="number">6</span>, <span class="number">1990</span>},                  <span class="comment">// birthdate</span>
+        {<span class="number">10</span>, <span class="number">3</span>, <span class="number">2020</span>},                  <span class="comment">// hiredate</span>
+        {<span class="string">"456 Oak Avenue"</span>, <span class="string">"Portland"</span>, 
+         <span class="string">"Oregon"</span>, <span class="number">97201</span>},             <span class="comment">// address</span>
+        <span class="number">65000.0</span>                        <span class="comment">// salary</span>
+    };
+    
+    <span class="comment">// Alternative: Initialize step by step</span>
+    <span class="keyword">struct</span> Employee emp2;
+    emp2.id = <span class="number">1002</span>;
+    strcpy(emp2.name, <span class="string">"Mike Davis"</span>);
+    emp2.birthdate.day = <span class="number">22</span>;
+    emp2.birthdate.month = <span class="number">11</span>;
+    emp2.birthdate.year = <span class="number">1985</span>;
+    emp2.hiredate.day = <span class="number">5</span>;
+    emp2.hiredate.month = <span class="number">7</span>;
+    emp2.hiredate.year = <span class="number">2019</span>;
+    strcpy(emp2.address.street, <span class="string">"789 Pine Street"</span>);
+    strcpy(emp2.address.city, <span class="string">"Seattle"</span>);
+    strcpy(emp2.address.state, <span class="string">"Washington"</span>);
+    emp2.address.zipcode = <span class="number">98101</span>;
+    emp2.salary = <span class="number">58000.0</span>;
+    
+    <span class="comment">// Display both employees</span>
+    printEmployee(&emp1);
+    printEmployee(&emp2);
+    
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+            </div>
+
+            <h3>Structure Memory Layout</h3>
+            
+            <div class="visual-example">
+                <h4>How Structures Are Stored in Memory</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                    <div>
+                        <h5>Structure Definition:</h5>
+                        <div class="code-block" style="font-size: 12px;">
+<span class="keyword">struct</span> Example {
+    <span class="keyword">char</span> a;     <span class="comment">// 1 byte</span>
+    <span class="keyword">int</span> b;      <span class="comment">// 4 bytes</span>
+    <span class="keyword">float</span> c;    <span class="comment">// 4 bytes</span>
+};
+                        </div>
+                    </div>
+                    <div>
+                        <h5>Memory Layout:</h5>
+                        <div style="display: flex; flex-direction: column;">
+                            <div class="memory-box" style="background: #ffebee; font-size: 12px;">char a (1 byte) + 3 padding bytes</div>
+                            <div class="memory-box" style="background: #e8f5e8; font-size: 12px;">int b (4 bytes)</div>
+                            <div class="memory-box" style="background: #e3f2fd; font-size: 12px;">float c (4 bytes)</div>
+                            <div style="text-align: center; margin-top: 10px; font-weight: bold;">Total: 12 bytes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <h4>🏋️ Practice Exercise 2</h4>
+                <p><strong>Challenge:</strong> Create a library management system using structures.</p>
+                <p><strong>Requirements:</strong></p>
+                <ul>
+                    <li>Create a Book structure with title, author, ISBN, and availability status</li>
+                    <li>Create an array of 5 books</li>
+                    <li>Write functions to: add a book, search by title, and check out a book</li>
+                </ul>
+                <details style="margin-top: 10px;">
+                    <summary><strong>Click for Starter Code</strong></summary>
+                    <div class="code-block" style="margin-top: 10px;">
+<span class="keyword">struct</span> Book {
+    <span class="keyword">char</span> title[<span class="number">60</span>];
+    <span class="keyword">char</span> author[<span class="number">40</span>];
+    <span class="keyword">char</span> isbn[<span class="number">20</span>];
+    <span class="keyword">int</span> available;  <span class="comment">// 1 = available, 0 = checked out</span>
+};
+
+<span class="comment">// Your functions here:</span>
+<span class="keyword">void</span> addBook(<span class="keyword">struct</span> Book *library, <span class="keyword">int</span> index);
+<span class="keyword">int</span> searchBook(<span class="keyword">struct</span> Book *library, <span class="keyword">int</span> size, <span class="keyword">char</span> *title);
+<span class="keyword">void</span> checkoutBook(<span class="keyword">struct</span> Book *library, <span class="keyword">int</span> index);
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- Enhanced Unions Section -->
+        <div id="unions" class="section">
+            <h2>🔄 Unions - Sharing Memory Efficiently</h2>
+            
+            <div class="beginner-note">
+                <h4>🤔 "What's the difference between structures and unions?"</h4>
+                <p>Great question! While structures give each member its own memory space, unions make all members share the same memory space. Think of it like this:</p>
+                <ul>
+                    <li><strong>Structure = Apartment building:</strong> Each resident has their own room</li>
+                    <li><strong>Union = Hotel room:</strong> Only one guest can use the room at a time</li>
+                </ul>
+            </div>
+
+            <h3>Understanding Memory Sharing</h3>
+            
+            <div class="visual-example">
+                <h4>Memory Comparison: Structure vs Union</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <h5>Structure Memory (Separate Spaces)</h5>
+                        <div style="display: flex; flex-direction: column;">
+                            <div class="memory-box" style="background: #e8f5e8;">int num (4 bytes)</div>
+                            <div class="memory-box" style="background: #ffe8e8;">float decimal (4 bytes)</div>
+                            <div class="memory-box" style="background: #e8e8ff;">char letter (1 byte)</div>
+                            <div style="text-align: center; font-weight: bold; margin-top: 10px;">Total: 9 bytes (+ padding)</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h5>Union Memory (Shared Space)</h5>
+                        <div style="display: flex; flex-direction: column;">
+                            <div class="memory-box" style="background: #f0f0f0; border: 3px solid #666;">
+                                <strong>Same 4 bytes used by:</strong><br>
+                                • int num<br>
+                                • float decimal<br>
+                                • char letter
+                            </div>
+                            <div style="text-align: center; font-weight: bold; margin-top: 10px;">Total: 4 bytes only!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Your First Union</h3>
+            
+            <div class="code-explanation">
+                <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="comment">// Define a union - similar syntax to struct</span>
+<span class="keyword">union</span> SimpleData {
+    <span class="keyword">int</span> number;      <span class="comment">// 4 bytes</span>
+    <span class="keyword">float</span> decimal;   <span class="comment">// 4 bytes</span>
+    <span class="keyword">char</span> letter;     <span class="comment">// 1 byte</span>
+};
+
+<span class="keyword">int</span> main() {
+    <span class="keyword">union</span> SimpleData data;
+    
+    printf(<span class="string">"Size of union: %lu bytes\n"</span>, <span class="keyword">sizeof</span>(data));
+    printf(<span class="string">"Address of number: %p\n"</span>, (<span class="keyword">void</span>*)&data.number);
+    printf(<span class="string">"Address of decimal: %p\n"</span>, (<span class="keyword">void</span>*)&data.decimal);
+    printf(<span class="string">"Address of letter: %p\n\n"</span>, (<span class="keyword">void</span>*)&data.letter);
+    
+    <span class="comment">// Store an integer</span>
+    data.number = <span class="number">1000</span>;
+    printf(<span class="string">"Stored integer 1000:\n"</span>);
+    printf(<span class="string">"  data.number = %d\n"</span>, data.number);
+    printf(<span class="string">"  data.decimal = %f (garbage!)\n"</span>, data.decimal);
+    printf(<span class="string">"  data.letter = %c (garbage!)\n\n"</span>, data.letter);
+    
+    <span class="comment">// Store a float - overwrites the integer!</span>
+    data.decimal = <span class="number">3.14159</span>;
+    printf(<span class="string">"Stored float 3.14159:\n"</span>);
+    printf(<span class="string">"  data.number = %d (garbage!)\n"</span>, data.number);
+    printf(<span class="string">"  data.decimal = %f\n"</span>, data.decimal);
+    printf(<span class="string">"  data.letter = %c (garbage!)\n\n"</span>, data.letter);
+    
+    <span class="comment">// Store a character - overwrites the float!</span>
+    data.letter = <span class="string">'A'</span>;
+    printf(<span class="string">"Stored character 'A':\n"</span>);
+    printf(<span class="string">"  data.number = %d (ASCII value of 'A')\n"</span>, data.number);
+    printf(<span class="string">"  data.decimal = %f (garbage!)\n"</span>, data.decimal);
+    printf(<span class="string">"  data.letter = %c\n"</span>, data.letter);
+    
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+                </div>
+                
+                <div class="explanation-text">
+                    <h4>Key Observations:</h4>
+                    <ul>
+                        <li><strong>Same address:</strong> All members have the same memory address</li>
+                        <li><strong>Size of largest:</strong> Union size equals the largest member (4 bytes for int/float)</li>
+                        <li><strong>One at a time:</strong> Only one member can hold meaningful data</li>
+                        <li><strong>Overwriting:</strong> Storing in one member overwrites others</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Important Union Rules</h4>
+                <ol>
+                    <li><strong>Only initialize the first member</strong> during declaration</li>
+                    <li><strong>Only one member is valid</strong> at any given time</li>
+                    <li><strong>Reading invalid members</strong> gives unpredictable results</li>
+                    <li><strong>Size is determined</strong> by the largest member</li>
+                </ol>
+            </div>
+
+            <h3>When to Use Unions - Practical Examples</h3>
+
+            <h4>Example 1: Type Conversion and Bit Manipulation</h4>
+            
+            <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="comment">// Union for examining float representation</span>
+<span class="keyword">union</span> FloatAnalyzer {
+    <span class="keyword">float</span> f;
+    <span class="keyword">unsigned int</span> bits;
+    <span class="keyword">unsigned char</span> bytes[<span class="number">4</span>];
+};
+
+<span class="keyword">void</span> analyzeFloat(<span class="keyword">float</span> value) {
+    <span class="keyword">union</span> FloatAnalyzer analyzer;
+    analyzer.f = value;
+    
+    printf(<span class="string">"Analyzing float %.6f:\n"</span>, value);
+    printf(<span class="string">"  As integer: %u\n"</span>, analyzer.bits);
+    printf(<span class="string">"  As hex: 0x%08X\n"</span>, analyzer.bits);
+    printf(<span class="string">"  Bytes: "</span>);
+    
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) {
+        printf(<span class="string">"%02X "</span>, analyzer.bytes[i]);
+    }
+    printf(<span class="string">"\n\n"</span>);
+}
+
+<span class="keyword">int</span> main() {
+    analyzeFloat(<span class="number">1.0</span>);
+    analyzeFloat(<span class="number">-1.0</span>);
+    analyzeFloat(<span class="number">3.14159</span>);
+    
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+            </div>
+
+            <h4>Example 2: Variant Data Types</h4>
+            
+            <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;string.h&gt;</span>
+
+<span class="comment">// Enumeration to track data type</span>
+<span class="keyword">enum</span> DataType {
+    TYPE_INT,
+    TYPE_FLOAT,
+    TYPE_STRING,
+    TYPE_CHAR
+};
+
+<span class="comment">// Structure containing union for flexible data storage</span>
+<span class="keyword">struct</span> FlexibleVariable {
+    <span class="keyword">enum</span> DataType type;        <span class="comment">// What type of data is stored</span>
+    <span class="keyword">char</span> name[<span class="number">20</span>];             <span class="comment">// Variable name</span>
+    <span class="keyword">union</span> {                    <span class="comment">// The actual data</span>
+        <span class="keyword">int</span> int_val;
+        <span class="keyword">float</span> float_val;
+        <span class="keyword">char</span> string_val[<span class="number">50</span>];
+        <span class="keyword">char</span> char_val;
+    } value;
+};
+
+<span class="keyword">void</span> printVariable(<span class="keyword">struct</span> FlexibleVariable *var) {
+    printf(<span class="string">"Variable '%s': "</span>, var-&gt;name);
+    
+    <span class="keyword">switch</span>(var-&gt;type) {
+        <span class="keyword">case</span> TYPE_INT:
+            printf(<span class="string">"(int) %d\n"</span>, var-&gt;value.int_val);
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> TYPE_FLOAT:
+            printf(<span class="string">"(float) %.2f\n"</span>, var-&gt;value.float_val);
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> TYPE_STRING:
+            printf(<span class="string">"(string) \"%s\"\n"</span>, var-&gt;value.string_val);
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> TYPE_CHAR:
+            printf(<span class="string">"(char) '%c'\n"</span>, var-&gt;value.char_val);
+            <span class="keyword">break</span>;
+        <span class="keyword">default</span>:
+            printf(<span class="string">"Unknown type\n"</span>);
+    }
+}
+
+<span class="keyword">int</span> main() {
+    <span class="comment">// Create array of flexible variables</span>
+    <span class="keyword">struct</span> FlexibleVariable variables[<span class="number">4</span>];
+    
+    <span class="comment">// Store different types of data</span>
+    strcpy(variables[<span class="number">0</span>].name, <span class="string">"age"</span>);
+    variables[<span class="number">0</span>].type = TYPE_INT;
+    variables[<span class="number">0</span>].value.int_val = <span class="number">25</span>;
+    
+    strcpy(variables[<span class="number">1</span>].name, <span class="string">"height"</span>);
+    variables[<span class="number">1</span>].type = TYPE_FLOAT;
+    variables[<span class="number">1</span>].value.float_val = <span class="number">5.9</span>;
+    
+    strcpy(variables[<span class="number">2</span>].name, <span class="string">"name"</span>);
+    variables[<span class="number">2</span>].type = TYPE_STRING;
+    strcpy(variables[<span class="number">2</span>].value.string_val, <span class="string">"John Doe"</span>);
+    
+    strcpy(variables[<span class="number">3</span>].name, <span class="string">"grade"</span>);
+    variables[<span class="number">3</span>].type = TYPE_CHAR;
+    variables[<span class="number">3</span>].value.char_val = <span class="string">'A'</span>;
+    
+    printf(<span class="string">"Dynamic Variables:\n"</span>);
+    printf(<span class="string">"==================\n"</span>);
+    
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) {
+        printVariable(&variables[i]);
+    }
+    
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+            </div>
+
+            <h3>Union vs Structure Memory Comparison</h3>
+            
+            <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="keyword">struct</span> TestStruct {
+    <span class="keyword">int</span> a;
+    <span class="keyword">float</span> b;
+    <span class="keyword">char</span> c[<span class="number">10</span>];
+    <span class="keyword">double</span> d;
+};
+
+<span class="keyword">union</span> TestUnion {
+    <span class="keyword">int</span> a;
+    <span class="keyword">float</span> b;
+    <span class="keyword">char</span> c[<span class="number">10</span>];
+    <span class="keyword">double</span> d;
+};
+
+<span class="keyword">int</span> main() {
+    <span class="keyword">struct</span> TestStruct s;
+    <span class="keyword">union</span> TestUnion u;
+    
+    printf(<span class="string">"Memory Size Comparison:\n"</span>);
+    printf(<span class="string">"=======================\n"</span>);
+    printf(<span class="string">"Structure size: %lu bytes\n"</span>, <span class="keyword">sizeof</span>(s));
+    printf(<span class="string">"Union size: %lu bytes\n\n"</span>, <span class="keyword">sizeof</span>(u));
+    
+    printf(<span class="string">"Individual member sizes:\n"</span>);
+    printf(<span class="string">"int: %lu bytes\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>));
+    printf(<span class="string">"float: %lu bytes\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">float</span>));
+    printf(<span class="string">"char[10]: %lu bytes\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">char</span>[<span class="number">10</span>]));
+    printf(<span class="string">"double: %lu bytes\n\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">double</span>));
+    
+    printf(<span class="string">"Structure: Sum of all members (+ padding)\n"</span>);
+    printf(<span class="string">"Union: Size of largest member (double = %lu bytes)\n"</span>, 
+           <span class="keyword">sizeof</span>(<span class="keyword">double</span>));
+    
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+            </div>
+
+            <h3>Common Union Pitfalls</h3>
+            
+            <div class="troubleshooting">
+                <h4>🐛 Common Mistakes and How to Avoid Them</h4>
+                
+                <h5>Mistake 1: Reading the wrong member</h5>
+                <div class="code-block" style="font-size: 13px;">
+<span class="keyword">union</span> Data {
+    <span class="keyword">int</span> num;
+    <span class="keyword">char</span> str[<span class="number">20</span>];
+} data;
+
+data.num = <span class="number">100</span>;
+printf(<span class="string">"%s\n"</span>, data.str);  <span class="comment">// WRONG! str contains garbage</span>
+                </div>
+                
+                <h5>Mistake 2: Forgetting which member was last set</h5>
+                <div class="code-block" style="font-size: 13px;">
+<span class="comment">// Always track which member is currently valid</span>
+<span class="keyword">struct</span> SafeUnion {
+    <span class="keyword">enum</span> { INT_TYPE, FLOAT_TYPE } type;
+    <span class="keyword">union</span> {
+        <span class="keyword">int</span> i;
+        <span class="keyword">float</span> f;
+    } data;
+};
+                </div>
+                
+                <h5>Mistake 3: Initializing multiple members</h5>
+                <div class="code-block" style="font-size: 13px;">
+<span class="comment">// WRONG: Only first member can be initialized</span>
+<span class="keyword">union</span> Data data = {<span class="number">10</span>, <span class="number">3.14</span>};  <span class="comment">// Error!</span>
+
+<span class="comment">// CORRECT: Initialize only first member</span>
+<span class="keyword">union</span> Data data = {<span class="number">10</span>};        <span class="comment">// OK</span>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <h4>🏋️ Practice Exercise 3</h4>
+                <p><strong>Challenge:</strong> Create a calculator that can store results in different formats.</p>
+                <p><strong>Requirements:</strong></p>
+                <ul>
+                    <li>Create a union that can store: int, float, or string representation</li>
+                    <li>Create a structure that includes the union and tracks the current type</li>
+                    <li>Write functions to convert between types and display results</li>
+                </ul>
+                <details style="margin-top: 10px;">
+                    <summary><strong>Click for Starter Code</strong></summary>
+                    <div class="code-block" style="margin-top: 10px;">
+<span class="keyword">enum</span> ResultType { INT_RESULT, FLOAT_RESULT, STRING_RESULT };
+
+<span class="keyword">struct</span> CalculatorResult {
+    <span class="keyword">enum</span> ResultType current_type;
+    <span class="keyword">union</span> {
+        <span class="keyword">int</span> int_result;
+        <span class="keyword">float</span> float_result;
+        <span class="keyword">char</span> string_result[<span class="number">50</span>];
+    } value;
+};
+
+<span class="comment">// Your functions here:</span>
+<span class="keyword">void</span> setIntResult(<span class="keyword">struct</span> CalculatorResult *calc, <span class="keyword">int</span> value);
+<span class="keyword">void</span> setFloatResult(<span class="keyword">struct</span> CalculatorResult *calc, <span class="keyword">float</span> value);
+<span class="keyword">void</span> convertToString(<span class="keyword">struct</span> CalculatorResult *calc);
+<span class="keyword">void</span> displayResult(<span class="keyword">struct</span> CalculatorResult *calc);
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- Enhanced File Handling Section -->
+        <div id="filehandling" class="section">
+            <h2>📁 File Handling - Saving and Loading Data</h2>
+            
+            <div class="beginner-note">
+                <h4>🤔 "Why do I need to work with files?"</h4>
+                <p>Think about it - when you close a program, all the data in variables disappears! Files let you:</p>
+                <ul>
+                    <li><strong>Save data permanently</strong> - So it survives when the program ends</li>
+                    <li><strong>Share data</strong> - Between different programs or users</li>
+                    <li><strong>Process large amounts of data</strong> - That won't fit in memory all at once</li>
+                </ul>
+                <p>It's like the difference between writing on a whiteboard (temporary) vs writing in a book (permanent)!</p>
+            </div>
+
+            <h3>File Operations Overview</h3>
+            
+            <div class="analogy-box">
+                <h4>📚 Files are Like Books in a Library</h4>
+                <ul>
+                    <li><strong>fopen():</strong> Taking a book off the shelf and opening it</li>
+                    <li><strong>fread():</strong> Reading pages from the book</li>
+                    <li><strong>fwrite():</strong> Writing new content in the book</li>
+                    <li><strong>fseek():</strong> Jumping to a specific page number</li>
+                    <li><strong>ftell():</strong> Checking which page you're currently on</li>
+                    <li><strong>fclose():</strong> Closing the book and putting it back</li>
+                </ul>
+            </div>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h4>📖 fread()</h4>
+                    <p><strong>Purpose:</strong> Read data from a file into memory</p>
+                    <p><strong>When to use:</strong> Loading saved data, processing file contents</p>
+                    <p><strong>Returns:</strong> Number of items successfully read</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h4>📝 fwrite()</h4>
+                    <p><strong>Purpose:</strong> Write data from memory to a file</p>
+                    <p><strong>When to use:</strong> Saving data permanently, creating files</p>
+                    <p><strong>Returns:</strong> Number of items successfully written</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h4>🎯 fseek()</h4>
+                    <p><strong>Purpose:</strong> Move to a specific position in the file</p>
+                    <p><strong>When to use:</strong> Random access, jumping to specific records</p>
+                    <p><strong>Options:</strong> SEEK_SET, SEEK_CUR, SEEK_END</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h4>📍 ftell()</h4>
+                    <p><strong>Purpose:</strong> Get current position in the file</p>
+                    <p><strong>When to use:</strong> Finding file size, bookmarking positions</p>
+                    <p><strong>Returns:</strong> Current position as number of bytes</p>
+                </div>
+            </div>
+
+            <h3>Understanding File Modes</h3>
+            
+            <div class="step-by-step">
+                <h4>File Opening Modes Explained:</h4>
+                <ol>
+                    <li><strong>"r":</strong> Read only - File must exist</li>
+                    <li><strong>"w":</strong> Write only - Creates new file or overwrites existing</li>
+                    <li><strong>"a":</strong> Append - Adds to end of file</li>
+                    <li><strong>"r+":</strong> Read and write - File must exist</li>
+                    <li><strong>"w+":</strong> Read and write - Creates new file or overwrites</li>
+                    <li><strong>"rb", "wb":</strong> Binary modes - For non-text data</li>
+                </ol>
+            </div>
+
+            <h3>Your First File Program - Writing Data</h3>
+            
+            <div class="code-explanation">
+                <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;stdlib.h&gt;</span>
+
+<span class="keyword">struct</span> Student {
+    <span class="keyword">int</span> id;
+    <span class="keyword">char</span> name[<span class="number">30</span>];
+    <span class="keyword">float</span> gpa;
+    <span class="keyword">int</span> age;
+};
+
+<span class="keyword">int</span> main() {
+    FILE *file;
+    <span class="keyword">struct</span> Student students[] = {
+        {<span class="number">101</span>, <span class="string">"Alice Johnson"</span>, <span class="number">3.8</span>, <span class="number">20</span>},
+        {<span class="number">102</span>, <span class="string">"Bob Smith"</span>, <span class="number">3.5</span>, <span class="number">21</span>},
+        {<span class="number">103</span>, <span class="string">"Carol Davis"</span>, <span class="number">3.9</span>, <span class="number">19</span>},
+        {<span class="number">104</span>, <span class="string">"David Wilson"</span>, <span class="number">3.2</span>, <span class="number">22</span>}
+    };
+    
+    <span class="comment">// Step 1: Open file for writing in binary mode</span>
+    file = fopen(<span class="string">"students.dat"</span>, <span class="string">"wb"</span>);
+    <span class="keyword">if</span> (file == NULL) {
+        printf(<span class="string">"Error: Cannot create file!\n"</span>);
+        <span class="keyword">return</span> <span class="number">1</span>;
+    }
+    
+    <span class="comment">// Step 2: Write all students to file</span>
+    <span class="keyword">size_t</span> written = fwrite(students, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> Student), <span class="number">4</span>, file);
+    
+    <span class="comment">// Step 3: Check if write was successful</span>
+    <span class="keyword">if</span> (written == <span class="number">4</span>) {
+        printf(<span class="string">"Successfully wrote %zu students to file!\n"</span>, written);
+        printf(<span class="string">"File size: %zu bytes\n"</span>, written * <span class="keyword">sizeof</span>(<span class="keyword">struct</span> Student));
+    } <span class="keyword">else</span> {
+        printf(<span class="string">"Error: Only wrote %zu out of 4 students!\n"</span>, written);
+    }
+    
+    <span class="comment">// Step 4: Close the file</span>
+    fclose(file);
+    printf(<span class="string">"File closed successfully.\n"</span>);
+    
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+                </div>
+                
+                <div class="explanation-text">
+                    <h4>Breaking Down fwrite():</h4>
+                    <p><code>fwrite(data, size_of_each_item, number_of_items, file_pointer)</code></p>
+                    <ul>
+                        <li><strong>students:</strong> Pointer to data to write</li>
+                        <li><strong>sizeof(struct Student):</strong> Size of each student record</li>
+                        <li><strong>4:</strong> Number of students to write</li>
+                        <li><strong>file:</strong> File pointer from fopen</li>
+                    </ul>
+                    <p><strong>Return value:</strong> Number of items actually written (should equal number requested)</p>
+                </div>
+            </div>
+
+            <div class="output-box">
+                <h4>Expected Output:</h4>
+                <pre>Successfully wrote 4 students to file!
+File size: 168 bytes
+File closed successfully.</pre>
+            </div>
+
+            <h3>Reading Data Back from Files</h3>
+            
+            <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;stdlib.h&gt;</span>
+
+<span class="keyword">struct</span> Student {
+    <span class="keyword">int</span> id;
+    <span class="keyword">char</span> name[<span class="number">30</span>];
+    <span class="keyword">float</span> gpa;
+    <span class="keyword">int</span> age;
+};
+
+<span class="keyword">int</span> main() {
+    FILE *file;
+    <span class="keyword">struct</span> Student students[<span class="number">10</span>];  <span class="comment">// Array to hold read data</span>
+    
+    <span class="comment">// Step 1: Open file for reading</span>
+    file = fopen(<span class="string">"students.dat"</span>, <span class="string">"rb"</span>);
+    <span class="keyword">if</span> (file == NULL) {
+        printf(<span class="string">"Error: Cannot open file! Make sure to run the write program first.\n"</span>);
+        <span class="keyword">return</span> <span class="number">1</span>;
+    }
+    
+    <span class="comment">// Step 2: Read students from file</span>
+    <span class="keyword">size_t</span> read_count = fread(students, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> Student), <span class="number">10</span>, file);
+    
+    <span class="comment">// Step 3: Display the results</span>
+    printf(<span class="string">"Successfully read %zu students from file:\n"</span>, read_count);
+    printf(<span class="string">"===========================================\n"</span>);
+    
+    <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; read_count; i++) {
+        printf(<span class="string">"Student %zu:\n"</span>, i + <span class="number">1</span>);
+        printf(<span class="string">"  ID: %d\n"</span>, students[i].id);
+        printf(<span class="string">"  Name: %s\n"</span>, students[i].name);
+        printf(<span class="string">"  GPA: %.2f\n"</span>, students[i].gpa);
+        printf(<span class="string">"  Age: %d\n\n"</span>, students[i].age);
+    }
+    
+    <span class="comment">// Step 4: Close the file</span>
+    fclose(file);
+    
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+            </div>
+
+            <h3>File Position Control with fseek() and ftell()</h3>
+            
+            <div class="beginner-note">
+                <h4>🎯 Why Control File Position?</h4>
+                <p>Sometimes you don't want to read a file from beginning to end. Maybe you want to:</p>
+                <ul>
+                    <li><strong>Jump to a specific record</strong> in a database file</li>
+                    <li><strong>Read the file backwards</strong> from end to beginning</li>
+                    <li><strong>Skip unwanted data</strong> and jump to interesting parts</li>
+                    <li><strong>Update specific records</strong> without rewriting the whole file</li>
+                </ul>
+            </div>
+
+            <div class="code-explanation">
+                <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;stdlib.h&gt;</span>
+
+<span class="keyword">int</span> main() {
+    FILE *file;
+    <span class="keyword">char</span> message[] = <span class="string">"Hello, World! This is a test file for seeking operations."</span>;
+    <span class="keyword">char</span> buffer[<span class="number">20</span>];
+    
+    <span class="comment">// Step 1: Create a test file</span>
+    file = fopen(<span class="string">"test.txt"</span>, <span class="string">"w"</span>);
+    <span class="keyword">if</span> (file != NULL) {
+        fprintf(file, <span class="string">"%s"</span>, message);
+        fclose(file);
+        printf(<span class="string">"Created test file with: \"%s\"\n\n"</span>, message);
+    }
+    
+    <span class="comment">// Step 2: Open file for reading and demonstrate seeking</span>
+    file = fopen(<span class="string">"test.txt"</span>, <span class="string">"r"</span>);
+    <span class="keyword">if</span> (file == NULL) {
+        printf(<span class="string">"Error opening file!\n"</span>);
+        <span class="keyword">return</span> <span class="number">1</span>;
+    }
+    
+    printf(<span class="string">"File Position Demonstrations:\n"</span>);
+    printf(<span class="string">"============================\n"</span>);
+    
+    <span class="comment">// Get initial position</span>
+    printf(<span class="string">"1. Initial position: %ld\n"</span>, ftell(file));
+    
+    <span class="comment">// Read first 7 characters</span>
+    fread(buffer, <span class="number">1</span>, <span class="number">7</span>, file);
+    buffer[<span class="number">7</span>] = <span class="string">'\0'</span>;
+    printf(<span class="string">"2. Read 7 chars: \"%s\"\n"</span>, buffer);
+    printf(<span class="string">"3. Position after reading: %ld\n\n"</span>, ftell(file));
+    
+    <span class="comment">// Seek to position 14 (start of "This")</span>
+    fseek(file, <span class="number">14</span>, SEEK_SET);
+    printf(<span class="string">"4. After seeking to position 14: %ld\n"</span>, ftell(file));
+    fread(buffer, <span class="number">1</span>, <span class="number">4</span>, file);
+    buffer[<span class="number">4</span>] = <span class="string">'\0'</span>;
+    printf(<span class="string">"5. Read 4 chars from position 14: \"%s\"\n\n"</span>, buffer);
+    
+    <span class="comment">// Seek relative to current position</span>
+    fseek(file, <span class="number">3</span>, SEEK_CUR);  <span class="comment">// Skip " is"</span>
+    printf(<span class="string">"6. After seeking +3 from current: %ld\n"</span>, ftell(file));
+    fread(buffer, <span class="number">1</span>, <span class="number">2</span>, file);
+    buffer[<span class="number">2</span>] = <span class="string">'\0'</span>;
+    printf(<span class="string">"7. Read 2 chars: \"%s\"\n\n"</span>, buffer);
+    
+    <span class="comment">// Find file size by seeking to end</span>
+    fseek(file, <span class="number">0</span>, SEEK_END);
+    <span class="keyword">long</span> file_size = ftell(file);
+    printf(<span class="string">"8. File size: %ld bytes\n"</span>, file_size);
+    
+    <span class="comment">// Read last 10 characters</span>
+    fseek(file, <span class="number">-10</span>, SEEK_END);  <span class="comment">// 10 chars from end</span>
+    printf(<span class="string">"9. Position 10 chars from end: %ld\n"</span>, ftell(file));
+    fread(buffer, <span class="number">1</span>, <span class="number">10</span>, file);
+    buffer[<span class="number">10</span>] = <span class="string">'\0'</span>;
+    printf(<span class="string">"10. Last 10 characters: \"%s\"\n"</span>, buffer);
+    
+    fclose(file);
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+                </div>
+                
+                <div class="explanation-text">
+                    <h4>Understanding fseek() Parameters:</h4>
+                    <p><code>fseek(file, offset, whence)</code></p>
+                    <ul>
+                        <li><strong>SEEK_SET:</strong> Move relative to beginning of file</li>
+                        <li><strong>SEEK_CUR:</strong> Move relative to current position</li>
+                        <li><strong>SEEK_END:</strong> Move relative to end of file</li>
+                    </ul>
+                    <p><strong>Offset:</strong> Positive = forward, Negative = backward</p>
+                </div>
+            </div>
+
+            <h3>Practical Example: Student Database with Random Access</h3>
+            
+            <div class="code-block">
+<span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;stdlib.h&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;string.h&gt;</span>
+
+<span class="keyword">struct</span> Student {
+    <span class="keyword">int</span> id;
+    <span class="keyword">char</span> name[<span class="number">30</span>];
+    <span class="keyword">float</span> gpa;
+    <span class="keyword">int</span> age;
+};
+
+<span class="keyword">void</span> createDatabase() {
+    FILE *file = fopen(<span class="string">"student_db.dat"</span>, <span class="string">"wb"</span>);
+    <span class="keyword">struct</span> Student students[] = {
+        {<span class="number">1001</span>, <span class="string">"Alice Johnson"</span>, <span class="number">3.85</span>, <span class="number">20</span>},
+        {<span class="number">1002</span>, <span class="string">"Bob Smith"</span>, <span class="number">3.52</span>, <span class="number">21</span>},
+        {<span class="number">1003</span>, <span class="string">"Carol Davis"</span>, <span class="number">3.91</span>, <span class="number">19</span>},
+        {<span class="number">1004</span>, <span class="string">"David Wilson"</span>, <span class="number">3.23</span>, <span class="number">22</span>},
+        {<span class="number">1005</span>, <span class="string">"Emma Brown"</span>, <span class="number">3.76</span>, <span class="number">20</span>}
+    };
+    
+    fwrite(students, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> Student), <span class="number">5</span>, file);
+    fclose(file);
+    printf(<span class="string">"Database created with 5 students.\n\n"</span>);
+}
+
+<span class="keyword">void</span> readStudentByIndex(<span class="keyword">int</span> index) {
+    FILE *file = fopen(<span class="string">"student_db.dat"</span>, <span class="string">"rb"</span>);
+    <span class="keyword">if</span> (file == NULL) {
+        printf(<span class="string">"Error: Database not found!\n"</span>);
+        <span class="keyword">return</span>;
+    }
+    
+    <span class="keyword">struct</span> Student student;
+    
+    <span class="comment">// Calculate position of specific student</span>
+    <span class="keyword">long</span> position = index * <span class="keyword">sizeof</span>(<span class="keyword">struct</span> Student);
+    
+    <span class="comment">// Seek to that position</span>
+    <span class="keyword">if</span> (fseek(file, position, SEEK_SET) != <span class="number">0</span>) {
+        printf(<span class="string">"Error: Cannot seek to student %d\n"</span>, index);
+        fclose(file);
+        <span class="keyword">return</span>;
+    }
+    
+    <span class="comment">// Read the student</span>
+    <span class="keyword">if</span> (fread(&student, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> Student), <span class="number">1</span>, file) == <span class="number">1</span>) {
+        printf(<span class="string">"Student at index %d:\n"</span>, index);
+        printf(<span class="string">"  ID: %d\n"</span>, student.id);
+        printf(<span class="string">"  Name: %s\n"</span>, student.name);
+        printf(<span class="string">"  GPA: %.2f\n"</span>, student.gpa);
+        printf(<span class="string">"  Age: %d\n\n"</span>, student.age);
+    } <span class="keyword">else</span> {
+        printf(<span class="string">"Error: Student at index %d not found\n\n"</span>, index);
+    }
+    
+    fclose(file);
+}
+
+<span class="keyword">void</span> updateStudentGPA(<span class="keyword">int</span> index, <span class="keyword">float</span> newGPA) {
+    FILE *file = fopen(<span class="string">"student_db.dat"</span>, <span class="string">"r+b"</span>);  <span class="comment">// Read and write mode</span>
+    <span class="keyword">if</span> (file == NULL) {
+        printf(<span class="string">"Error: Cannot open database for updating!\n"</span>);
+        <span class="keyword">return</span>;
+    }
+    
+    <span class="comment">// Seek to the student's record</span>
+    <span class="keyword">long</span> position = index * <span class="keyword">sizeof</span>(<span class="keyword">struct</span> Student);
+    fseek(file, position, SEEK_SET);
+    
+    <span class="comment">// Read current record</span>
+    <span class="keyword">struct</span> Student student;
+    <span class="keyword">if</span> (fread(&student, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> Student), <span class="number">1</span>, file) == <span class="number">1</span>) {
+        printf(<span class="string">"Updating %s's GPA from %.2f to %.2f\n"</span>, 
+               student.name, student.gpa, newGPA);
+        
+        <span class="comment">// Update the GPA</span>
+        student.gpa = newGPA;
+        
+        <span class="comment">// Go back to the same position</span>
+        fseek(file, position, SEEK_SET);
+        
+        <span class="comment">// Write the updated record</span>
+        fwrite(&student, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> Student), <span class="number">1</span>, file);
+        printf(<span class="string">"Update successful!\n\n"</span>);
+    } <span class="keyword">else</span> {
+        printf(<span class="string">"Error: Student at index %d not found\n\n"</span>, index);
+    }
+    
+    fclose(file);
+}
+
+<span class="keyword">int</span> main() {
+    printf(<span class="string">"Student Database Demo\n"</span>);
+    printf(<span class="string">"====================\n\n"</span>);
+    
+    <span class="comment">// Create the database</span>
+    createDatabase();
+    
+    <span class="comment">// Read specific students</span>
+    printf(<span class="string">"Reading specific students:\n"</span>);
+    readStudentByIndex(<span class="number">0</span>);  <span class="comment">// First student</span>
+    readStudentByIndex(<span class="number">2</span>);  <span class="comment">// Third student</span>
+    readStudentByIndex(<span class="number">4</span>);  <span class="comment">// Last student</span>
+    
+    <span class="comment">// Update a student's GPA</span>
+    printf(<span class="string">"Updating student data:\n"</span>);
+    updateStudentGPA(<span class="number">1</span>, <span class="number">3.75</span>);  <span class="comment">// Update Bob's GPA</span>
+    
+    <span class="comment">// Read the updated student</span>
+    printf(<span class="string">"Reading updated student:\n"</span>);
+    readStudentByIndex(<span class="number">1</span>);
+    
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+            </div>
+
+            <h3>File Operations Best Practices</h3>
+            
+            <div class="important-note">
+                <h4>🛡️ Essential File Handling Rules</h4>
+                <ol>
+                    <li><strong>Always check if fopen() succeeds</strong> - Files might not exist or be locked</li>
+                    <li><strong>Always close files</strong> - Use fclose() to free resources</li>
+                    <li><strong>Check return values</strong> - fread/fwrite return actual items processed</li>
+                    <li><strong>Use appropriate modes</strong> - Binary for structures, text for strings</li>
+                    <li><strong>Handle errors gracefully</strong> - Don't crash when files are missing</li>
+                </ol>
+            </div>
+
+            <div class="troubleshooting">
+                <h4>🔧 Common File Handling Problems</h4>
+                
+                <h5>Problem 1: File not found</h5>
+                <div class="code-block" style="font-size: 13px;">
+<span class="comment">// Always check if file opened successfully</span>
+FILE *file = fopen(<span class="string">"data.txt"</span>, <span class="string">"r"</span>);
+<span class="keyword">if</span> (file == NULL) {
+    printf(<span class="string">"Error: Cannot open file!\n"</span>);
+    <span class="keyword">return</span> <span class="number">1</span>;  <span class="comment">// Exit with error code</span>
+}
+                </div>
+                
+                <h5>Problem 2: Partial reads/writes</h5>
+                <div class="code-block" style="font-size: 13px;">
+<span class="comment">// Check if all data was processed</span>
+<span class="keyword">size_t</span> written = fwrite(data, <span class="keyword">sizeof</span>(item), count, file);
+<span class="keyword">if</span> (written != count) {
+    printf(<span class="string">"Warning: Only wrote %zu out of %d items\n"</span>, written, count);
+}
+                </div>
+                
+                <h5>Problem 3: Forgetting to close files</h5>
+                <div class="code-block" style="font-size: 13px;">
+<span class="comment">// Always close files, even on error</span>
+FILE *file = fopen(<span class="string">"data.txt"</span>, <span class="string">"w"</span>);
+<span class="keyword">if</span> (file == NULL) <span class="keyword">return</span> <span class="number">1</span>;
+
+<span class="comment">// ... do file operations ...</span>
+
+fclose(file);  <span class="comment">// Don't forget this!</span>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <h4>🏋️ Practice Exercise 4</h4>
+                <p><strong>Challenge:</strong> Create a simple contact management system.</p>
+                <p><strong>Requirements:</strong></p>
+                <ul>
+                    <li>Structure to store: name, phone, email, age</li>
+                    <li>Functions to: add contact, search by name, list all contacts, delete contact</li>
+                    <li>Save/load all data to/from a binary file</li>
+                    <li>Use fseek() to implement random access for searching</li>
+                </ul>
+                <details style="margin-top: 10px;">
+                    <summary><strong>Click for Starter Code</strong></summary>
+                    <div class="code-block" style="margin-top: 10px;">
+<span class="keyword">struct</span> Contact {
+    <span class="keyword">char</span> name[<span class="number">30</span>];
+    <span class="keyword">char</span> phone[<span class="number">15</span>];
+    <span class="keyword">char</span> email[<span class="number">50</span>];
+    <span class="keyword">int</span> age;
+    <span class="keyword">int</span> active;  <span class="comment">// 1 = active, 0 = deleted</span>
+};
+
+<span class="comment">// Your functions here:</span>
+<span class="keyword">void</span> addContact(<span class="keyword">struct</span> Contact *contact);
+<span class="keyword">int</span> searchContact(<span class="keyword">char</span> *name);
+<span class="keyword">void</span> listAllContacts();
+<span class="keyword">void</span> deleteContact(<span class="keyword">char</span> *name);
+<span class="keyword">void</span> saveContacts();
+<span class="keyword">void</span> loadContacts();
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- Enhanced Comparison Section -->
+        <div id="comparison" class="section">
+            <h2>📊 Summary and Comparison</h2>
+            
+            <div class="beginner-note">
+                <h4>🎯 Putting It All Together</h4>
+                <p>Now that we've learned about pointers, structures, unions, and file handling, let's see how they compare and when to use each one. Think of this as your "cheat sheet" for choosing the right tool for the job!</p>
+            </div>
+
+            <h3>Complete Feature Comparison</h3>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Pointers</th>
+                        <th>Structures</th>
+                        <th>Unions</th>
+                        <th>File Operations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Primary Purpose</strong></td>
+                        <td>Access memory addresses indirectly</td>
+                        <td>Group related data together</td>
+                        <td>Share memory between different data types</td>
+                        <td>Store/retrieve data permanently</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Memory Usage</strong></td>
+                        <td>Size of address (4 or 8 bytes)</td>
+                        <td>Sum of all members + padding</td>
+                        <td>Size of largest member only</td>
+                        <td>No memory (data on disk)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Access</strong></td>
+                        <td>Indirect through address (*ptr)</td>
+                        <td>Direct access (obj.member)</td>
+                        <td>Shared access (one at a time)</td>
+                        <td>Sequential or random (fseek)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Best Use Cases</strong></td>
+                        <td>Dynamic memory, function parameters, arrays</td>
+                        <td>Complex records, databases, objects</td>
+                        <td>Memory optimization, variant types</td>
+                        <td>Data persistence, large datasets</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Learning Difficulty</strong></td>
+                        <td>Hard (pointer arithmetic, dereferencing)</td>
+                        <td>Easy (intuitive grouping)</td>
+                        <td>Medium (memory sharing concept)</td>
+                        <td>Medium (modes, seeking, error handling)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Common Errors</strong></td>
+                        <td>Null pointers, memory leaks, segfaults</td>
+                        <td>Forgetting to initialize, padding issues</td>
+                        <td>Reading wrong member, type confusion</td>
+                        <td>File not found, forgetting to close</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Memory Layout Visualization</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 30px 0;">
+                <div class="concept-card">
+                    <h4>🔗 Pointer Memory</h4>
+                    <div class="memory-diagram" style="flex-direction: column; padding: 15px;">
+                        <div class="memory-box" style="background: #e8f5e8; margin: 2px;">Variable: int x = 42<br>Address: 1000</div>
+                        <div style="margin: 5px 0;">↑</div>
+                        <div class="memory-box" style="background: #ffe8e8; margin: 2px;">Pointer: int *p<br>Value: 1000</div>
+                    </div>
+                    <p style="font-size: 14px;">Pointer stores the address of another variable</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h4>🏗️ Structure Memory</h4>
+                    <div class="memory-diagram" style="flex-direction: column; padding: 15px;">
+                        <div class="memory-box" style="background: #e3f2fd; margin: 2px;">int id: 4 bytes</div>
+                        <div class="memory-box" style="background: #f3e5f5; margin: 2px;">char name[20]: 20 bytes</div>
+                        <div class="memory-box" style="background: #e8f5e8; margin: 2px;">float gpa: 4 bytes</div>
+                    </div>
+                    <p style="font-size: 14px;">Each member has its own space</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h4>🔄 Union Memory</h4>
+                    <div class="memory-diagram" style="flex-direction: column; padding: 15px;">
+                        <div class="memory-box" style="background: #fff3e0; border: 2px dashed #ff9800;">
+                            <strong>Shared Space</strong><br>
+                            int OR float OR char[20]<br>
+                            (largest: 20 bytes)
+                        </div>
+                    </div>
+                    <p style="font-size: 14px;">All members share the same memory</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h4>📁 File Storage</h4>
+                    <div class="memory-diagram" style="flex-direction: column; padding: 15px;">
+                        <div class="memory-box" style="background: #e8f5e8; margin: 2px;">Record 1</div>
+                        <div class="memory-box" style="background: #e8f5e8; margin: 2px;">Record 2</div>
+                        <div class="memory-box" style="background: #e8f5e8; margin: 2px;">Record 3</div>
+                        <div style="margin: 5px 0;">⬇️ Persistent Storage</div>
+                    </div>
+                    <p style="font-size: 14px;">Data stored permanently on disk</p>
+                </div>
+            </div>
+
+            <h3>Decision Tree: When to Use What?</h3>
+            
+            <div class="step-by-step">
+                <h4>Follow this decision tree to choose the right approach:</h4>
+                <ol>
+                    <li><strong>Do you need to store data permanently?</strong>
+                        <br>→ Yes: Use <strong>File Operations</strong>
+                        <br>→ No: Continue to step 2</li>
+                        
+                    <li><strong>Do you need to group multiple related data items?</strong>
+                        <br>→ Yes: Go to step 3
+                        <br>→ No: Go to step 4</li>
+                        
+                    <li><strong>Do all data items need to be accessible simultaneously?</strong>
+                        <br>→ Yes: Use <strong>Structures</strong>
+                        <br>→ No: Use <strong>Unions</strong> (to save memory)</li>
+                        
+                    <li><strong>Do you need indirect access to data or memory efficiency?</strong>
+                        <br>→ Yes: Use <strong>Pointers</strong>
+                        <br>→ No: Use regular variables</li>
+                </ol>
+            </div>
+
+            <h3>Real-World Application Examples</h3>
+            
+            <div class="concept-grid">
+                <div class="example-box">
+                    <h4>🏫 Student Management System</h4>
+                    <p><strong>Uses:</strong> Structures (student records) + File operations (persistence) + Pointers (efficient function calls)</p>
+                    <div class="code-block" style="font-size: 12px; margin-top: 10px;">
+<span class="keyword">struct</span> Student {
+    <span class="keyword">int</span> id;
+    <span class="keyword">char</span> name[<span class="number">50</span>];
+    <span class="keyword">float</span> grades[<span class="number">5</span>];
+};
+
+<span class="keyword">void</span> saveStudents(<span class="keyword">struct</span> Student *students, <span class="keyword">int</span> count);
+<span class="keyword">void</span> loadStudents(<span class="keyword">struct</span> Student *students, <span class="keyword">int</span> *count);
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <h4>🎮 Game Configuration System</h4>
+                    <p><strong>Uses:</strong> Unions (different setting types) + Structures (setting organization) + File operations (save settings)</p>
+                    <div class="code-block" style="font-size: 12px; margin-top: 10px;">
+<span class="keyword">struct</span> GameSetting {
+    <span class="keyword">char</span> name[<span class="number">30</span>];
+    <span class="keyword">enum</span> SettingType type;
+    <span class="keyword">union</span> {
+        <span class="keyword">int</span> int_val;
+        <span class="keyword">float</span> float_val;
+        <span class="keyword">char</span> string_val[<span class="number">50</span>];
+    } value;
+};
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <h4>📊 Data Processing Pipeline</h4>
+                    <p><strong>Uses:</strong> Pointers (dynamic arrays) + File operations (large datasets) + Structures (data organization)</p>
+                    <div class="code-block" style="font-size: 12px; margin-top: 10px;">
+<span class="keyword">struct</span> DataRecord *loadData(<span class="keyword">char</span> *filename, <span class="keyword">int</span> *count);
+<span class="keyword">void</span> processData(<span class="keyword">struct</span> DataRecord *data, <span class="keyword">int</span> count);
+<span class="keyword">void</span> saveResults(<span class="keyword">struct</span> DataRecord *data, <span class="keyword">int</span> count);
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <h4>🔧 Embedded System Communication</h4>
+                    <p><strong>Uses:</strong> Unions (protocol interpretation) + Pointers (hardware registers) + Structures (message format)</p>
+                    <div class="code-block" style="font-size: 12px; margin-top: 10px;">
+<span class="keyword">struct</span> Message {
+    <span class="keyword">uint8_t</span> header;
+    <span class="keyword">union</span> {
+        <span class="keyword">uint32_t</span> raw_data;
+        <span class="keyword">struct</span> { <span class="keyword">uint16_t</span> x, y; } coordinates;
+    } payload;
+};
+                    </div>
+                </div>
+            </div>
+
+            <h3>Performance and Memory Considerations</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                <div class="important-note">
+                    <h4>⚡ Performance Tips</h4>
+                    <ul>
+                        <li><strong>Pointers:</strong> Faster than copying large structures</li>
+                        <li><strong>Structures:</strong> Group related data for cache efficiency</li>
+                        <li><strong>Unions:</strong> Minimize memory usage in memory-constrained systems</li>
+                        <li><strong>Files:</strong> Use binary mode for better performance</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box">
+                    <h4>⚠️ Common Pitfalls</h4>
+                    <ul>
+                        <li><strong>Pointers:</strong> Dereferencing NULL or uninitialized pointers</li>
+                        <li><strong>Structures:</strong> Padding can waste memory</li>
+                        <li><strong>Unions:</strong> Reading the wrong member gives garbage</li>
+                        <li><strong>Files:</strong> Not checking return values leads to data corruption</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Your Learning Journey Continues</h3>
+            
+            <div class="analogy-box">
+                <h4>🎓 What You've Accomplished</h4>
+                <p>Congratulations! You now understand four fundamental concepts in C programming:</p>
+                <ul>
+                    <li><strong>Pointers:</strong> You can work with memory addresses and create efficient programs</li>
+                    <li><strong>Structures:</strong> You can organize complex data into meaningful groups</li>
+                    <li><strong>Unions:</strong> You can optimize memory usage when appropriate</li>
+                    <li><strong>File Handling:</strong> You can create programs that save and load data</li>
+                </ul>
+                <p><strong>These skills form the foundation for advanced topics like:</strong> dynamic memory allocation, linked lists, trees, databases, and system programming!</p>
+            </div>
+
+            <div class="step-by-step">
+                <h4>🚀 Next Steps in Your C Programming Journey:</h4>
+                <ol>
+                    <li><strong>Practice the exercises</strong> - Build muscle memory with hands-on coding</li>
+                    <li><strong>Combine concepts</strong> - Create programs that use structures + pointers + files</li>
+                    <li><strong>Study advanced topics:</strong>
+                        <ul style="margin: 10px 0 10px 20px;">
+                            <li>Dynamic memory allocation (malloc, free)</li>
+                            <li>Linked lists and data structures</li>
+                            <li>Function pointers</li>
+                            <li>Multi-file projects</li>
+                        </ul>
+                    </li>
+                    <li><strong>Build real projects</strong> - Contact managers, simple databases, games</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Enhanced Practice Section -->
+        <div id="exercises" class="section">
+            <h2>🏋️ Practice Exercises & Projects</h2>
+            
+            <div class="beginner-note">
+                <h4>💪 Ready to Test Your Skills?</h4>
+                <p>The best way to truly understand these concepts is to use them! These exercises start simple and gradually increase in complexity. Don't worry if you get stuck - that's part of learning!</p>
+            </div>
+
+            <h3>Level 1: Basic Concepts (Beginners)</h3>
+            
+            <div class="exercise-box">
+                <h4>Exercise 1: Pointer Basics</h4>
+                <p><strong>Goal:</strong> Master basic pointer operations</p>
+                <p><strong>Task:</strong></p>
+                <ol>
+                    <li>Create an integer variable with value 100</li>
+                    <li>Create a pointer to that variable</li>
+                    <li>Print the value, address, and pointer address</li>
+                    <li>Use the pointer to change the value to 200</li>
+                    <li>Create a second pointer that points to the first pointer</li>
+                </ol>
+                <details style="margin-top: 10px;">
+                    <summary><strong>Hint & Expected Output</strong></summary>
+                    <p><strong>Key concepts to use:</strong> &, *, **</p>
+                    <div class="output-box">
+                        <pre>Original value: 100
+Address of variable: 0x...
+Address of pointer: 0x...
+After change: 200
+Value through double pointer: 200</pre>
+                    </div>
+                </details>
+            </div>
+
+            <div class="exercise-box">
+                <h4>Exercise 2: Structure Practice</h4>
+                <p><strong>Goal:</strong> Create and manipulate structures</p>
+                <p><strong>Task:</strong></p>
+                <ol>
+                    <li>Create a "Car" structure with: brand, model, year, price</li>
+                    <li>Create an array of 3 cars</li>
+                    <li>Write a function to display car information</li>
+                    <li>Write a function to find the most expensive car</li>
+                    <li>Write a function to apply a discount to all cars</li>
+                </ol>
+                <details style="margin-top: 10px;">
+                    <summary><strong>Starter Structure</strong></summary>
+                    <div class="code-block">
+<span class="keyword">struct</span> Car {
+    <span class="keyword">char</span> brand[<span class="number">20</span>];
+    <span class="keyword">char</span> model[<span class="number">30</span>];
+    <span class="keyword">int</span> year;
+    <span class="keyword">float</span> price;
+};
+
+<span class="comment">// Your functions here:</span>
+<span class="keyword">void</span> displayCar(<span class="keyword">struct</span> Car *car);
+<span class="keyword">int</span> findMostExpensive(<span class="keyword">struct</span> Car cars[], <span class="keyword">int</span> count);
+<span class="keyword">void</span> applyDiscount(<span class="keyword">struct</span> Car cars[], <span class="keyword">int</span> count, <span class="keyword">float</span> discount);
+                    </div>
+                </details>
+            </div>
+
+            <h3>Level 2: Intermediate Challenges</h3>
+            
+            <div class="exercise-box">
+                <h4>Exercise 3: Union Application</h4>
+                <p><strong>Goal:</strong> Build a flexible data storage system</p>
+                <p><strong>Task:</strong></p>
+                <ol>
+                    <li>Create a union that can store: int, float, or string</li>
+                    <li>Create a structure that combines the union with a type indicator</li>
+                    <li>Write functions to safely set and get values</li>
+                    <li>Create an array of these flexible variables</li>
+                    <li>Write a function to display all variables with their types</li>
+                </ol>
+                <details style="margin-top: 10px;">
+                    <summary><strong>Challenge Requirements</strong></summary>
+                    <div class="important-note">
+                        <ul>
+                            <li>Must prevent reading wrong union member</li>
+                            <li>Must handle type conversion errors gracefully</li>
+                            <li>Should demonstrate memory efficiency of unions</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+
+            <div class="exercise-box">
+                <h4>Exercise 4: File-Based Database</h4>
+                <p><strong>Goal:</strong> Create a persistent data storage system</p>
+                <p><strong>Task:</strong></p>
+                <ol>
+                    <li>Design a "Product" structure with: ID, name, category, price, quantity</li>
+                    <li>Implement functions to: add, search, update, delete products</li>
+                    <li>Use binary files for data storage</li>
+                    <li>Implement random access using fseek/ftell</li>
+                    <li>Add a simple menu-driven interface</li>
+                </ol>
+                <details style="margin-top: 10px;">
+                    <summary><strong>Advanced Features to Add</strong></summary>
+                    <ul>
+                        <li>Sort products by different criteria</li>
+                        <li>Generate reports (total inventory value, low stock items)</li>
+                        <li>Import/export data to text files</li>
+                        <li>Handle file corruption gracefully</li>
+                    </ul>
+                </details>
+            </div>
+
+            <h3>Level 3: Advanced Projects</h3>
+            
+            <div class="exercise-box">
+                <h4>Project 1: Student Management System</h4>
+                <p><strong>Goal:</strong> Combine all concepts in a real-world application</p>
+                <p><strong>Features to implement:</strong></p>
+                <ul>
+                    <li><strong>Data Structure:</strong> Student with personal info, grades, courses</li>
+                    <li><strong>Memory Management:</strong> Dynamic arrays using pointers</li>
+                    <li><strong>File Operations:</strong> Save/load student data, backup/restore</li>
+                    <li><strong>Advanced Features:</strong> GPA calculation, transcript generation, search/filter</li>
+                </ul>
+                <details style="margin-top: 10px;">
+                    <summary><strong>Architecture Suggestions</strong></summary>
+                    <div class="code-block">
+<span class="keyword">struct</span> Course {
+    <span class="keyword">char</span> code[<span class="number">10</span>];
+    <span class="keyword">char</span> name[<span class="number">50</span>];
+    <span class="keyword">int</span> credits;
+    <span class="keyword">float</span> grade;
+};
+
+<span class="keyword">struct</span> Student {
+    <span class="keyword">int</span> id;
+    <span class="keyword">char</span> name[<span class="number">50</span>];
+    <span class="keyword">struct</span> Date birthdate;
+    <span class="keyword">struct</span> Course *courses;  <span class="comment">// Dynamic array</span>
+    <span class="keyword">int</span> course_count;
+    <span class="keyword">float</span> gpa;
+};
+
+<span class="comment">// Core functions:</span>
+<span class="keyword">void</span> addStudent(<span class="keyword">struct</span> Student **students, <span class="keyword">int</span> *count);
+<span class="keyword">void</span> saveToFile(<span class="keyword">struct</span> Student *students, <span class="keyword">int</span> count);
+<span class="keyword">int</span> loadFromFile(<span class="keyword">struct</span> Student **students);
+<span class="keyword">void</span> generateTranscript(<span class="keyword">struct</span> Student *student);
+                    </div>
+                </details>
+            </div>
+
+            <div class="exercise-box">
+                <h4>Project 2: Configuration File Parser</h4>
+                <p><strong>Goal:</strong> Build a system that reads complex configuration files</p>
+                <p><strong>Features to implement:</strong></p>
+                <ul>
+                    <li><strong>Union Usage:</strong> Handle different value types (int, float, string, boolean)</li>
+                    <li><strong>Structure Design:</strong> Nested configurations, sections, arrays</li>
+                    <li><strong>File Processing:</strong> Parse text files, handle comments, validate syntax</li>
+                    <li><strong>Error Handling:</strong> Detailed error messages, recovery mechanisms</li>
+                </ul>
+                <details style="margin-top: 10px;">
+                    <summary><strong>Sample Config Format</strong></summary>
+                    <div class="code-block">
+<span class="comment"># Sample configuration file</span>
+[database]
+host = <span class="string">"localhost"</span>
+port = <span class="number">3306</span>
+timeout = <span class="number">30.5</span>
+use_ssl = <span class="keyword">true</span>
+
+[logging]
+level = <span class="string">"debug"</span>
+file = <span class="string">"/var/log/app.log"</span>
+max_size = <span class="number">100</span>
+                    </div>
+                </details>
+            </div>
+
+            <h3>Debugging and Testing Challenges</h3>
+            
+            <div class="troubleshooting">
+                <h4>🐛 Bug Hunt Exercises</h4>
+                <p>Each of these code snippets has bugs. Can you find and fix them?</p>
+                
+                <h5>Bug Hunt 1: Pointer Problems</h5>
+                <div class="code-block" style="font-size: 13px;">
+<span class="keyword">int</span> main() {
+    <span class="keyword">int</span> *ptr;
+    *ptr = <span class="number">100</span>;  <span class="comment">// BUG: What's wrong here?</span>
+    printf(<span class="string">"%d\n"</span>, ptr);  <span class="comment">// BUG: Another problem!</span>
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+                </div>
+                
+                <h5>Bug Hunt 2: Structure Issues</h5>
+                <div class="code-block" style="font-size: 13px;">
+<span class="keyword">struct</span> Person {
+    <span class="keyword">char</span> name[<span class="number">20</span>];
+    <span class="keyword">int</span> age;
+};
+
+<span class="keyword">void</span> updateAge(<span class="keyword">struct</span> Person p, <span class="keyword">int</span> newAge) {
+    p.age = newAge;  <span class="comment">// BUG: Why won't this work?</span>
+}
+                </div>
+                
+                <h5>Bug Hunt 3: File Handling Errors</h5>
+                <div class="code-block" style="font-size: 13px;">
+<span class="keyword">int</span> main() {
+    FILE *file = fopen(<span class="string">"data.txt"</span>, <span class="string">"r"</span>);
+    <span class="keyword">char</span> buffer[<span class="number">100</span>];
+    fgets(buffer, <span class="number">100</span>, file);  <span class="comment">// BUG: What if file is NULL?</span>
+    printf(<span class="string">"%s"</span>, buffer);
+    <span class="comment">// BUG: Missing something important!</span>
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+                </div>
+                
+                <details style="margin-top: 15px;">
+                    <summary><strong>Click for Bug Solutions</strong></summary>
+                    <div style="margin-top: 10px;">
+                        <p><strong>Bug Hunt 1 Solutions:</strong></p>
+                        <ul>
+                            <li>Line 2: ptr is uninitialized - should point to a valid variable first</li>
+                            <li>Line 3: Printing ptr (address) instead of *ptr (value)</li>
+                        </ul>
+                        <p><strong>Bug Hunt 2 Solution:</strong></p>
+                        <ul>
+                            <li>Parameter is passed by value - changes don't affect original. Use pointer parameter.</li>
+                        </ul>
+                        <p><strong>Bug Hunt 3 Solutions:</strong></p>
+                        <ul>
+                            <li>Line 3: No NULL check after fopen</li>
+                            <li>Missing fclose() call</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+
+            <h3>Assessment Checklist</h3>
+            
+            <div class="step-by-step">
+                <h4>✅ Self-Assessment: Can You Do These?</h4>
+                
+                <h5>Pointers Mastery:</h5>
+                <ul style="list-style-type: none;">
+                    <li>☐ Declare and initialize pointers correctly</li>
+                    <li>☐ Use & and * operators properly</li>
+                    <li>☐ Pass pointers to functions to modify original variables</li>
+                    <li>☐ Work with arrays using pointer arithmetic</li>
+                    <li>☐ Understand const pointer variations</li>
+                </ul>
+                
+                <h5>Structures Proficiency:</h5>
+                <ul style="list-style-type: none;">
+                    <li>☐ Define structures with appropriate data types</li>
+                    <li>☐ Initialize structures using different methods</li>
+                    <li>☐ Use dot and arrow operators correctly</li>
+                    <li>☐ Create arrays of structures</li>
+                    <li>☐ Work with nested structures</li>
+                </ul>
+                
+                <h5>Unions Understanding:</h5>
+                <ul style="list-style-type: none;">
+                    <li>☐ Explain the difference between unions and structures</li>
+                    <li>☐ Calculate union memory usage correctly</li>
+                    <li>☐ Use unions safely with type indicators</li>
+                    <li>☐ Identify appropriate use cases for unions</li>
+                </ul>
+                
+                <h5>File Handling Skills:</h5>
+                <ul style="list-style-type: none;">
+                    <li>☐ Open files with appropriate modes</li>
+                    <li>☐ Check for file operation errors</li>
+                    <li>☐ Use fread/fwrite with structures</li>
+                    <li>☐ Navigate files with fseek/ftell</li>
+                    <li>☐ Always close files and handle cleanup</li>
+                </ul>
+            </div>
+
+            <div class="analogy-box">
+                <h4>🎉 Congratulations!</h4>
+                <p>You've completed a comprehensive journey through some of C programming's most important concepts. These skills will serve as the foundation for:</p>
+                <ul>
+                    <li><strong>System Programming:</strong> Operating systems, device drivers</li>
+                    <li><strong>Embedded Programming:</strong> Microcontrollers, IoT devices</li>
+                    <li><strong>Game Development:</strong> High-performance graphics and game engines</li>
+                    <li><strong>Database Systems:</strong> Storage engines and data management</li>
+                    <li><strong>Network Programming:</strong> Protocols and communication systems</li>
+                </ul>
+                <p><strong>Keep practicing, keep building, and remember:</strong> Every expert was once a beginner!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // Update progress indicator if on intro page
+            updateProgressIndicator(sectionId);
+        }
+
+        function updateProgressIndicator(sectionId) {
+            const steps = document.querySelectorAll('.progress-step');
+            steps.forEach(step => step.classList.remove('active'));
+            
+            const stepMap = {
+                'intro': 0,
+                'pointers': 1,
+                'structures': 2,
+                'unions': 3,
+                'filehandling': 4,
+                'comparison': 5,
+                'exercises': 5
+            };
+            
+            if (stepMap[sectionId] !== undefined && steps[stepMap[sectionId]]) {
+                steps[stepMap[sectionId]].classList.add('active');
+            }
+        }
+
+        // Add interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects to code blocks
+            const codeBlocks = document.querySelectorAll('.code-block');
+            codeBlocks.forEach((block, index) => {
+                block.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                    this.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
+                });
+                
+                block.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                });
+
+                // Add copy functionality
+                const copyBtn = document.createElement('button');
+                copyBtn.textContent = '📋';
+                copyBtn.title = 'Copy code';
+                copyBtn.style.cssText = `
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    background: rgba(102, 126, 234, 0.8);
+                    color: white;
+                    border: none;
+                    padding: 8px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    opacity: 0;
+                    transition: all 0.3s;
+                    backdrop-filter: blur(5px);
+                `;
+                
+                block.style.position = 'relative';
+                block.appendChild(copyBtn);
+                
+                block.addEventListener('mouseenter', () => {
+                    copyBtn.style.opacity = '1';
+                });
+                block.addEventListener('mouseleave', () => {
+                    copyBtn.style.opacity = '0';
+                });
+                
+                copyBtn.addEventListener('click', async (e) => {
+                    e.stopPropagation();
+                    const codeText = block.textContent.replace('📋', '').trim();
+                    try {
+                        await navigator.clipboard.writeText(codeText);
+                        copyBtn.textContent = '✅';
+                        copyBtn.style.background = 'rgba(76, 175, 80, 0.8)';
+                        setTimeout(() => {
+                            copyBtn.textContent = '📋';
+                            copyBtn.style.background = 'rgba(102, 126, 234, 0.8)';
+                        }, 2000);
+                    } catch (err) {
+                        copyBtn.textContent = '❌';
+                        setTimeout(() => {
+                            copyBtn.textContent = '📋';
+                        }, 2000);
+                    }
+                });
+            });
+
+            // Add smooth scrolling for navigation
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelector('.container').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                });
+            });
+
+            // Add keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                const sections = ['intro', 'pointers', 'structures', 'unions', 'filehandling', 'comparison', 'exercises'];
+                const currentSection = document.querySelector('.section.active').id;
+                const currentIndex = sections.indexOf(currentSection);
+                
+                if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                    const prevBtn = document.querySelector(`[onclick="showSection('${sections[currentIndex - 1]}')"]`);
+                    if (prevBtn) prevBtn.click();
+                } else if (e.key === 'ArrowRight' && currentIndex < sections.length - 1) {
+                    const nextBtn = document.querySelector(`[onclick="showSection('${sections[currentIndex + 1]}')"]`);
+                    if (nextBtn) nextBtn.click();
+                }
+            });
+
+            // Initialize progress indicator
+            updateProgressIndicator('intro');
+
+            // Add dynamic examples for better understanding
+            addDynamicExamples();
+        });
+
+        function addDynamicExamples() {
+            // Add interactive memory diagram
+            const memoryDiagrams = document.querySelectorAll('.memory-diagram');
+            memoryDiagrams.forEach(diagram => {
+                diagram.addEventListener('click', function() {
+                    const boxes = this.querySelectorAll('.memory-box');
+                    boxes.forEach((box, index) => {
+                        setTimeout(() => {
+                            box.style.animation = 'pulse 0.5s ease-in-out';
+                            setTimeout(() => {
+                                box.style.animation = '';
+                            }, 500);
+                        }, index * 200);
+                    });
+                });
+            });
+        }
+
+        // Add CSS animation for pulse effect
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); background-color: #ffeb3b; }
+                100% { transform: scale(1); }
+            }
+            
+            .nav-btn:focus {
+                outline: 2px solid #fff;
+                outline-offset: 2px;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
